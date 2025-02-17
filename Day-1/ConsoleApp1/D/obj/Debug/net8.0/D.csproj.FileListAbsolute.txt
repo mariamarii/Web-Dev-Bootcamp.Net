@@ -1,0 +1,15 @@
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\bin\Debug\net8.0\D.exe
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\bin\Debug\net8.0\D.deps.json
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\bin\Debug\net8.0\D.runtimeconfig.json
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\bin\Debug\net8.0\D.dll
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\bin\Debug\net8.0\D.pdb
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\obj\Debug\net8.0\D.GeneratedMSBuildEditorConfig.editorconfig
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\obj\Debug\net8.0\D.AssemblyInfoInputs.cache
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\obj\Debug\net8.0\D.AssemblyInfo.cs
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\obj\Debug\net8.0\D.csproj.CoreCompileInputs.cache
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\obj\Debug\net8.0\D.sourcelink.json
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\obj\Debug\net8.0\D.dll
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\obj\Debug\net8.0\refint\D.dll
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\obj\Debug\net8.0\D.pdb
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\obj\Debug\net8.0\D.genruntimeconfig.cache
+E:\Web-Dev-Bootcamp.Net\Day-1\ConsoleApp1\D\obj\Debug\net8.0\ref\D.dll
