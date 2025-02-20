@@ -1,0 +1,15 @@
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\bin\Debug\net8.0\J.exe
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\bin\Debug\net8.0\J.deps.json
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\bin\Debug\net8.0\J.runtimeconfig.json
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\bin\Debug\net8.0\J.dll
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\bin\Debug\net8.0\J.pdb
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\obj\Debug\net8.0\J.GeneratedMSBuildEditorConfig.editorconfig
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\obj\Debug\net8.0\J.AssemblyInfoInputs.cache
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\obj\Debug\net8.0\J.AssemblyInfo.cs
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\obj\Debug\net8.0\J.csproj.CoreCompileInputs.cache
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\obj\Debug\net8.0\J.sourcelink.json
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\obj\Debug\net8.0\J.dll
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\obj\Debug\net8.0\refint\J.dll
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\obj\Debug\net8.0\J.pdb
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\obj\Debug\net8.0\J.genruntimeconfig.cache
+E:\Web-Dev-Bootcamp.Net\Day-2\ConsoleApp2\J\obj\Debug\net8.0\ref\J.dll
