@@ -1,0 +1,27 @@
+
+.table {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 50%;
+    margin: auto;
+    background-color: ghostwhite;
+}
+.row {
+    background-color: #e1dede;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+.full-width {
+    width: 100%;
+}
+.one-third {
+    width: calc(33.33% - 47px);
+}
+.half {
+    width: calc(50% - 45px);
+}
+.one-fourth {
+    width: calc(25% - 48px);
+}

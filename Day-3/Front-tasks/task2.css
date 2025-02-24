@@ -1,0 +1,26 @@
+div{
+    margin-inline-end: 25px;
+    margin-bottom: 20px;
+    width: 400px;
+ height: 400px;
+ background-color: gainsboro;
+ background-image: url(/blue\ grid.jpg);
+
+}
+.shape-1{
+    display: inline-block;
+ background-repeat:no-repeat;
+}
+.shape-2{
+    display: inline-block;
+    background-repeat:repeat-y;
+}
+.shape-3{
+    display: inline-block;
+    background-repeat:repeat-x;
+}
+
+.shape-4{
+    display: inline-block;
+    background-repeat:repeat;
+}

@@ -1,0 +1,35 @@
+img {
+    width: 100px;
+    height: 100px;
+    display: block;
+}
+th{
+    background-color: rgba(0, 0, 0, 0.733);
+    color: white;
+    height: 60px;
+    
+}
+
+td {
+    background-color: #ddd;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    border: 2px solid white;
+}
+button{
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px;
+    border-color:rgba(0, 0, 0, 0);
+    
+}
+.view-button{
+    background-color: darkcyan;
+}
+.delete-button{
+    background-color: crimson;
+}
+*{
+    font-family:  sans-serif;
+}

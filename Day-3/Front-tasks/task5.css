@@ -1,0 +1,17 @@
+div{
+    text-align: center;
+    font-size: 40px;
+    margin-top: 30px;
+}
+.Font-1{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: italic;
+    font-weight: lighter;
+}
+.Font-2{
+    font-family: fantasy;
+}
+.Font-3{
+    font-size: 25px;
+    font-weight: bolder;
+}
