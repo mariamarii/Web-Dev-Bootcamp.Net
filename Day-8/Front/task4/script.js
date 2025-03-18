@@ -1,2 +1,3 @@
 const div = document.querySelector('div');
-div.innerText.trim()
+div.innerText = div.innerText.trim();
+console.log(div.innerText); 
