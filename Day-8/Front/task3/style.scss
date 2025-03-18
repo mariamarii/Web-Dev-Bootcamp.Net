@@ -1,0 +1,31 @@
+
+body {
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+
+  height: 100vh;
+  margin: 0;
+}
+
+form {
+  padding: 20px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  input {
+    padding: 10px;
+    font-size: 16px;
+   
+    border: 1px solid $input-border;
+    border-radius: 5px;
+
+
+
+   
+  }
+
+  
+} 
