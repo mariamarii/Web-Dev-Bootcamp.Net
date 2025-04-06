@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/3a958a915b.js" crossorigin="anonymous"></script>
+
+  <title>Spider-Man Movies</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="container-inner">
+      <header class="navbar">
+        <div class="logo">
+          <span class="highlight">NEW</span> MOVIE
+        </div>
+        <nav>
+          <a href="#">New Movie</a>
+          <a href="#">Genre</a>
+          <a href="#">Country</a>
+          <a href="#">Movie</a>
+          <a href="#">TV Series</a> |
+          <a href="javascript:void(0);" id="search-icon"><i class="fa-solid fa-magnifying-glass"></i></a> 
+          <input type="text" id="search-input" placeholder="Search..." />
+        </nav>
+        
+      </header>
+
+      <div class="section">
+        <div class="section-inner">
+          <div class="content">
+            
+            <h1 class="title">Spider-Man<br />No Way Home</h1>
+            <div class="details">
+              
+              <span class="imdb highlight" >IMDb</span>
+              <strong id="rating">8.2</strong>
+              <span style="color: grey;"">
+              <span>(</span>
+              <span id="voteCount">1999</span>
+              <span>)</span>
+              </span>
+              <span>•</span>
+              <span id="year">2021</span> |
+              <span id="duration">1 hour 55 minuntes</span> |
+              <span id="genre">Sci-fi</span>
+            </div>
+            <p id="description">Loading description...</p>
+            <div class="buttons">
+              <button class="outline">Watch trailer</button>
+              <button class="fill"><i style="margin-right:5px;" class="fa-solid fa-play"></i> Watch now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="movie-slider">
+        <div class="slider-buttons-container">
+          <button class="slider-btn prev">❮</button>
+          <button class="slider-btn next">❯</button>
+        </div>
+
+        <div class="slider-container" id="movie-slider"></div>
+      </section>
+
+    </div>
+  </div>
+
+  <script type="module" src="./dist/sript.js"></script>
+</body>
+</html>
