@@ -6,7 +6,7 @@ import { IApp } from "./IApp.js";
 export class App implements IApp {
   private api: MovieAPI;
   private elements: MovieElements;
-  private allSpiderMovies: Movie[] = [];  
+  private allMovies: Movie[] = [];  
 
   constructor() {
     this.api = new MovieAPI();
@@ -15,23 +15,20 @@ export class App implements IApp {
 
   async init(): Promise<void> {
     await this.loadSpiderMovies();
-
     this.setupSearch();
   }
 
   private async loadSpiderMovies(): Promise<void> {
-    const movies = await this.api.searchMovies("spiderman");
+    const movies = await this.api.searchMovies("");
 
     if (movies.length) {
-      this.allSpiderMovies = movies;
-
+      this.allMovies = movies;
       this.elements.updateFeatured(movies[0]);
-
       this.elements.renderMovieCards(movies, (movie: Movie) => {
         this.elements.updateFeatured(movie);
       });
     } else {
-      console.log("No spider-related movies found.");
+      console.log("No movies found.");
     }
   }
 
@@ -39,27 +36,21 @@ export class App implements IApp {
     const searchInput = document.getElementById('search-input') as HTMLInputElement;
 
     if (searchInput) {
-      searchInput.addEventListener('input', (event) => {
+      searchInput.addEventListener('input', async (event) => { 
         const inputElement = event.target as HTMLInputElement;
         const query = inputElement.value.trim().toLowerCase();
 
         if (query.length > 0) {
-          this.filterMovies(query);
+          const searchMovies = await this.api.searchMovies(query); 
+          this.renderMovies(searchMovies);
         } else {
-          this.renderMovies(this.allSpiderMovies);
+          this.renderMovies(this.allMovies);
         }
       });
     }
   }
 
-  private filterMovies(query: string): void {
-    const filteredMovies = this.allSpiderMovies.filter(movie => {
-      return movie.title.toLowerCase().includes(query); 
-    });
-
-   
-    this.renderMovies(filteredMovies);
-  }
+  
 
   private renderMovies(movies: Movie[]): void {
     this.elements.renderMovieCards(movies, (movie: Movie) => {

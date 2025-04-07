@@ -11,7 +11,7 @@
 <body>
   <div class="container">
     <div class="container-inner">
-      <header class="navbar">
+      <header class="base-container navbar">
         <div class="logo">
           <span class="highlight">NEW</span> MOVIE
         </div>
@@ -27,7 +27,7 @@
         
       </header>
 
-      <div class="section">
+      <div class="section base-container">
         <div class="section-inner">
           <div class="content">
             
@@ -51,16 +51,19 @@
               <button class="outline">Watch trailer</button>
               <button class="fill"><i style="margin-right:5px;" class="fa-solid fa-play"></i> Watch now</button>
             </div>
+            <div class="slider-buttons-container">
+              <button class="slider-btn prev"> <i class="fas fa-chevron-left"></i></button>
+              <button class="slider-btn next"> <i class="fas fa-chevron-right"></i></button>
+            </div>
           </div>
+          
         </div>
+       
+
       </div>
 
       <section class="movie-slider">
-        <div class="slider-buttons-container">
-          <button class="slider-btn prev">❮</button>
-          <button class="slider-btn next">❯</button>
-        </div>
-
+        
         <div class="slider-container" id="movie-slider"></div>
       </section>
 
