@@ -20,7 +20,7 @@ export class MovieElements {
             title.textContent = movie.title;
     }
     setDescription(descriptionElement, text) {
-        const maxLength = 150; // Max length to show initially
+        const maxLength = 150;
         if (text.length > maxLength) {
             descriptionElement.textContent = text.slice(0, maxLength) + "...";
             const seeMoreLink = document.createElement("a");
@@ -65,7 +65,7 @@ export class MovieElements {
     renderMovieCards(movies, onCardFocus) {
         const container = document.getElementById("movie-slider");
         if (!container)
-            return; // Early exit if the container is not found
+            return;
         container.innerHTML = "";
         movies.forEach((movie, index) => {
             const card = document.createElement("div");
@@ -82,7 +82,7 @@ export class MovieElements {
         const prevBtn = document.querySelector(".slider-btn.prev");
         const nextBtn = document.querySelector(".slider-btn.next");
         if (!prevBtn || !nextBtn)
-            return; // Exit early if buttons are not found
+            return;
         const cards = Array.from(container.querySelectorAll(".movie-card"));
         let currentIndex = 0;
         const updateSlider = () => {

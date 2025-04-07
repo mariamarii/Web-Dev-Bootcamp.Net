@@ -5,14 +5,27 @@ export class MovieAPI {
         this.baseUrl = 'https://api.themoviedb.org/3';
     }
     searchMovies(query) {
-        return fetch(`${this.baseUrl}/search/movie?api_key=${this.apiKey}&query=${query}`)
-            .then(res => res.json())
-            .then(data => {
-            return data.results.map((m) => new Movie(m.title, m.overview, m.vote_average, m.release_date, m.backdrop_path, m.poster_path, m.vote_count));
-        })
-            .catch(error => {
-            console.error('Error fetching movies:', error);
-            throw error;
-        });
+        if (query) {
+            return fetch(`${this.baseUrl}/search/movie?api_key=${this.apiKey}&query=${query}`)
+                .then(res => res.json())
+                .then(data => {
+                return data.results.map((m) => new Movie(m.title, m.overview, m.vote_average, m.release_date, m.backdrop_path, m.poster_path, m.vote_count));
+            })
+                .catch(error => {
+                console.error('Error fetching movies:', error);
+                throw error;
+            });
+        }
+        else {
+            return fetch(`${this.baseUrl}/discover/movie?api_key=${this.apiKey}`)
+                .then(res => res.json())
+                .then(data => {
+                return data.results.map((m) => new Movie(m.title, m.overview, m.vote_average, m.release_date, m.backdrop_path, m.poster_path, m.vote_count));
+            })
+                .catch(error => {
+                console.error('Error fetching movies:', error);
+                throw error;
+            });
+        }
     }
 }

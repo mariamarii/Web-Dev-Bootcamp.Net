@@ -11,7 +11,7 @@ import { MovieAPI } from "./MovieAPI.js";
 import { MovieElements } from "./MovieElements.js";
 export class App {
     constructor() {
-        this.allSpiderMovies = [];
+        this.allMovies = [];
         this.api = new MovieAPI();
         this.elements = new MovieElements();
     }
@@ -23,43 +23,35 @@ export class App {
     }
     loadSpiderMovies() {
         return __awaiter(this, void 0, void 0, function* () {
-            const movies = yield this.api.searchMovies("spiderman");
+            const movies = yield this.api.searchMovies("");
             if (movies.length) {
-                this.allSpiderMovies = movies;
+                this.allMovies = movies;
                 this.elements.updateFeatured(movies[0]);
                 this.elements.renderMovieCards(movies, (movie) => {
                     this.elements.updateFeatured(movie);
                 });
             }
             else {
-                console.log("No spider-related movies found.");
+                console.log("No movies found.");
             }
         });
     }
     setupSearch() {
         const searchInput = document.getElementById('search-input');
         if (searchInput) {
-            searchInput.addEventListener('input', (event) => {
+            searchInput.addEventListener('input', (event) => __awaiter(this, void 0, void 0, function* () {
                 const inputElement = event.target;
                 const query = inputElement.value.trim().toLowerCase();
                 if (query.length > 0) {
-                    this.filterMovies(query);
+                    const searchMovies = yield this.api.searchMovies(query);
+                    this.renderMovies(searchMovies);
                 }
                 else {
-                    this.renderMovies(this.allSpiderMovies);
+                    this.renderMovies(this.allMovies);
                 }
-            });
+            }));
         }
     }
-    // Function to filter movies based on the search query
-    filterMovies(query) {
-        const filteredMovies = this.allSpiderMovies.filter(movie => {
-            return movie.title.toLowerCase().includes(query); // Filter based on title (case-insensitive)
-        });
-        // Render the filtered movies
-        this.renderMovies(filteredMovies);
-    }
-    // Function to render the filtered or all movies
     renderMovies(movies) {
         this.elements.renderMovieCards(movies, (movie) => {
             this.elements.updateFeatured(movie);
