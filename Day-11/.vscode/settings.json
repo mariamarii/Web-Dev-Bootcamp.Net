@@ -1,0 +1,24 @@
+{
+    "liveServer.settings.port": 5501,
+    "tailwindCSS.includeLanguages": {
+        "html": "html",
+        "javascript": "javascript",
+        "javascriptreact": "javascriptreact",
+        "typescript": "typescript",
+        "typescriptreact": "typescriptreact",
+        "vue": "vue",
+        "svelte": "svelte",
+        "astro": "astro",
+        "php": "html"
+    },
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "headwind.classRegex": {
+        "html": "class=\"([^\"]*)\"",
+        "javascriptreact": "className=\"([^\"]*)\"",
+        "typescriptreact": "className=\"([^\"]*)\""
+    },
+    "tailwindCSS.emmetCompletions": true,
+    "editor.inlineSuggest.enabled": true
+}

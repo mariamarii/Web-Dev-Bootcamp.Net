@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Landing Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/3a958a915b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <section class="min-h-screen bg-cover bg-no-repeat bg-center text-slate-300
+        bg-[url('./background-dark.webp')]">
+        <div class="container mx-auto  px-4 sm:px-6 lg:px-12">
+            <nav class="flex justify-between items-center h-16 pt-4 md:pt-8">
+                <a href="#" aria-label="Home">
+                    <svg class="h-8 text-white fill-current" viewBox="0 0 55 32" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M6.31257 3.02283C6.66833 1.39396 8.30831 0.0734863 9.97559 0.0734863H16.617L11.7216 22.4886H24.4009L22.3396 31.9265H0L6.31257 3.02283Z">
+                        </path>
+                        <path
+                            d="M31.6709 3.02283H41.3312L35.6629 28.977C35.3071 30.606 33.6671 31.9265 31.9998 31.9265H25.3582L31.6709 3.02283Z">
+                        </path>
+                        <path
+                            d="M54.6546 0.0734863H44.9942L38.6817 28.977H45.3232C46.9904 28.977 48.6304 27.6566 48.9862 26.0278L54.6546 0.0734863Z">
+                        </path>
+                        <path d="M19.6357 0.0734863H29.2961L25.0447 19.5391H15.3844L19.6357 0.0734863Z"></path>
+                    </svg>
+                </a>
+
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                    <div class="hamburger space-y-1.5">
+                        <span class="block w-6 h-0.5 bg-white transition-all"></span>
+                        <span class="block w-6 h-0.5 bg-white transition-all"></span>
+                        <span class="block w-4 h-0.5 bg-white transition-all"></span>
+                    </div>
+                </button>
+
+                <div class="hidden md:flex items-center bg-slate-900/80 rounded-full font-bold h-12 px-2 group-hover:text-black">
+                    <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
+                        About
+                        <span
+                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                    </a>
+                    <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
+                        Process
+                        <span
+                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                    </a>
+                    <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
+                        Work
+                        <span
+                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                    </a>
+                    <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
+                        Pricing
+                        <span
+                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                    </a>
+                    <div
+                        class="flex font-mono text-l font-thin items-center relative before:absolute before:left-0 before:top-1/2 before:h-6 before:-translate-y-1/2 before:border-l-2 before:border-gray-400/50 after:absolute after:right-0 after:top-1/2 after:h-6 after:-translate-y-1/2 after:border-r-2 after:border-gray-400/50  text-indigo-300/40  hover:text-white transition-all duration-300 relative group">
+                        <div class="relative flex justify-center">
+                            <button id="lang-toggle"
+                                class="relative p-2 mx-2 hover:text-indigo-200 cursor-pointer focus:bg-white/10">
+                                EN
+                            </button>
+                            <span
+                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+
+                            <div id="lang-dropdown"
+                                class="hidden absolute top-full mt-3 bg-gray-800 rounded-md shadow-lg z-10 text-center min-w-[4rem]">
+                                <div
+                                    class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-gray-800">
+                                </div>
+                                <a href="#"
+                                    class="block px-4 py-2 transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">EN</a>
+                                <a href="#"
+                                    class="block px-4 py-2 transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">DE</a>
+                            </div>
+                        </div>
+
+                        <div class="relative flex justify-center">
+                            <button id="theme-toggle"
+                                class="relative p-2 mx-2 hover:text-indigo-200 cursor-pointer focus:bg-white/10">
+                                <i class="fa-regular fa-moon"></i>
+                            </button>
+                            <span
+                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+
+                            <div id="theme-dropdown"
+                                class="hidden absolute top-full mt-3 bg-gray-800 rounded-md shadow-lg z-10 text-center min-w-[4rem]">
+                                <div
+                                    class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-gray-800">
+                                </div>
+                                <a href="#"
+                                    class="block px-4 py-2 transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">
+                                    <i class="fa-regular fa-sun"></i> 
+                                </a>
+                                <a href="#"
+                                    class="block px-4 py-2  transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">
+                                    <i class="fa-regular fa-moon"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button
+                        class="ml-4 bg-indigo-500 cursor-pointer hover: text-white font-medium px-5 py-2 rounded-full flex items-center transition-colors duration-300 ease-in-out group">
+                        Get Started
+                        <svg viewBox="0 0 24 24" class="size-5 stroke-[3px] fill-none stroke-current ml-1">
+                            <line x1="5" y1="12" x2="19" y2="12"
+                                class="scale-x-0 translate-x-[10px] group-hover:translate-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out" />
+                            <polyline points="12 5 19 12 12 19"
+                                class="-translate-x-2 group-hover:translate-x-0 transition-transform duration-300 ease-in-out" />
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+
+            <div id="mobile-menu" class="md:hidden bg-slate-900/90 rounded-lg mt-2 overflow-hidden transition-all duration-300 max-h-0">
+                <div class="px-4 py-2">
+                    <a href="#" class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">About</a>
+                    <a href="#" class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">Process</a>
+                    <a href="#" class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">Work</a>
+                    <a href="#" class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">Pricing</a>
+                    <div class="flex items-center px-4 py-3">
+                        <button class="text-white mr-4">
+                            <span class="font-mono">EN</span>
+                        </button>
+                        <button class="text-white">
+                            <i class="fa-regular fa-moon"></i>
+                        </button>
+                    </div>
+                    <button class="w-full bg-indigo-500 text-white font-medium px-5 py-3 rounded-full flex items-center justify-center mt-2 mb-2 transition-colors duration-300">
+                        Get Started
+                        <svg viewBox="0 0 24 24" class="size-5 stroke-[3px] fill-none stroke-current ml-1">
+                            <line x1="5" y1="12" x2="19" y2="12"
+                                class="scale-x-0 translate-x-[10px] group-hover:translate-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out" />
+                            <polyline points="12 5 19 12 12 19"
+                                class="-translate-x-2 group-hover:translate-x-0 transition-transform duration-300 ease-in-out" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="container mx-auto pt-12 md:pt-40 pb-2">
+                <div class="max-w-3xl">
+                    <p class="text-indigo-400 mb-4 font-mono text-lg sm:text-xl tracking-wider">DESIGN ENGINEERING AS A SERVICE
+                        <span class="text-gray-700 ml-2 sm:ml-4">///</span>
+                    </p>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl text-white font-bold mb-6 sm:mb-8 leading-tight">Make people fall in love with your SaaS product</h1>
+
+                    <p class="text-lg sm:text-xl mb-2">The first-ever <span class="font-semibold text-white">design engineering subscription for SaaS</span> companies.</p>
+                    <p class="text-lg sm:text-xl mb-8 sm:mb-10">Thoughtfully crafting compelling sites your visitors won't want to leave.</p>
+
+                    <div class="flex flex-wrap gap-3 sm:gap-4">
+                        <div class="flex flex-wrap items-center gap-3 sm:gap-4 font-medium">
+                            <button
+                                class="group bg-[#6366f1] hover: text-white px-5 sm:px-6 py-2 rounded-full flex items-center transition-all duration-300">
+                                Get Started
+                                <svg viewBox="0 0 24 24" class="h-5 w-5 ml-2 stroke-2 fill-none stroke-current">
+                                    <line x1="3" y1="12" x2="17" y2="12"
+                                        class="scale-x-0 translate-x-[8px]  group-hover:translate-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                                    <polyline points="14 5 21 12 14 19"
+                                        class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300" />
+                                </svg>
+                            </button>
+
+                            <button
+                                class="group bg-[#171c23] hover: text-white px-5 sm:px-6 py-2 rounded-full flex items-center transition-all duration-300">
+                                Schedule a Call
+                                <svg viewBox="0 0 24 24" class="h-5 w-5 ml-2 stroke-2 fill-none stroke-current">
+                                    <line x1="3" y1="12" x2="17" y2="12"
+                                        class="scale-x-0 translate-x-[8px]  group-hover:translate-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
+                                    <polyline points="14 5 21 12 14 19"
+                                        class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 sm:mt-12">
+                        <div class="flex items-center">
+                            <div class="flex -space-x-2">
+                                <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-slate-900" src="sean-c-davis.webp"
+                                    alt="User">
+                                <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-slate-900" src="sean-c-davis.webp"
+                                    alt="User">
+                                <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-slate-900" src="sean-c-davis.webp"
+                                    alt="User">
+                                <span class="flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 text-xs font-medium">+12</span>
+                            </div>
+                            <div class="ml-3 sm:ml-4">
+                                <p class="text-xs sm:text-sm">Trusted by great builders like <br><span
+                                        class="font-medium text-white">Johannes Schickling</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 pt-8 sm:pt-10 grid grid-cols-3 sm:grid-cols-5 gap-4 sm:gap-8 opacity-80">
+                <div class="flex items-center justify-center">
+                    <img src="https://lw.works/images/logos/clearyst-white.svg" alt="Clearyst" class="h-6 sm:h-8">
+                </div>
+                <div class="flex items-center justify-center">
+                    <img src="https://lw.works/images/logos/stackbit-white.svg" alt="Stackbit" class="h-6 sm:h-8">
+                </div>
+                <div class="flex items-center justify-center">
+                    <img src="https://lw.works/images/logos/contentlayer-white.svg" alt="Contentlayer" class="h-6 sm:h-8">
+                </div>
+                <div class="flex items-center justify-center col-span-3 sm:col-span-1">
+                    <img src="https://lw.works/images/logos/urlbox-white.svg" alt="Urlbox" class="h-6 sm:h-8">
+                </div>
+                <div class="flex items-center justify-center col-span-3 sm:col-span-1">
+                    <img src="https://lw.works/images/logos/netlify-white.svg" alt="Netlify" class="h-6 sm:h-8">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const hamburger = mobileMenuButton.querySelector('.hamburger');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                const isOpen = mobileMenu.classList.toggle('max-h-0');
+                mobileMenu.classList.toggle('max-h-[500px]');
+                mobileMenu.classList.toggle('py-2');
+                hamburger.classList.toggle('open');
+            });
+
+            const langToggle = document.getElementById('lang-toggle');
+            const langDropdown = document.getElementById('lang-dropdown');
+            
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeDropdown = document.getElementById('theme-dropdown');
+            
+            const allDropdowns = [langDropdown, themeDropdown];
+            
+            function closeAllDropdowns() {
+                allDropdowns.forEach(dropdown => {
+                    if (dropdown) {
+                        dropdown.classList.add('hidden');
+                    }
+                });
+            }
+            
+            function toggleDropdown(dropdown) {
+                const isCurrentlyHidden = dropdown.classList.contains('hidden');
+                
+                closeAllDropdowns();
+                
+                if (isCurrentlyHidden) {
+                    dropdown.classList.remove('hidden');
+                }
+            }
+            
+            if (langToggle && langDropdown) {
+                langToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleDropdown(langDropdown);
+                });
+            }
+            
+            if (themeToggle && themeDropdown) {
+                themeToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleDropdown(themeDropdown);
+                });
+            }
+            
+            document.addEventListener('click', closeAllDropdowns);
+        });
+    </script>
+</body>
+</html>
