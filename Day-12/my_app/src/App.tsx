@@ -6,7 +6,6 @@ import {
   List,
   ListItem,
   ListItemButton,
-  ListItemIcon,
   ListItemText,
   TextField,
   Paper,
@@ -15,11 +14,16 @@ import {
   Stack
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { CheckCircle, CheckCircleOutline, RadioButtonUnchecked } from '@mui/icons-material';
+import { CheckCircleOutline,} from '@mui/icons-material';
 
 export default function TodoList() {
-  let [tasks, setTasks] = useState([]);
-  let [newTask, setNewTask] = useState('');
+  type Task = {
+    text: string;
+    completed: boolean;
+  };
+  const [tasks, setTasks] = useState<Task[]>([]);
+ 
+  const [newTask, setNewTask] = useState('');
 
   const addTask = () => {
     if (newTask.trim()) {
