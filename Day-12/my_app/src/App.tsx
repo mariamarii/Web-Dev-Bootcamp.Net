@@ -48,7 +48,7 @@ export default function TodoList() {
 
 
       <Box sx={{ maxWidth: 600, margin: 'auto', p: 2 }}>
-        <Typography variant="h4">
+        <Typography variant="h4" sx={{ color:'black'}}>
           Todo List
         </Typography>
         <Paper elevation={3} sx={{ p: 2 }}>
