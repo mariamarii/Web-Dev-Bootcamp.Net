@@ -14,6 +14,7 @@
         bg-[url('./background-dark.webp')]">
         <div class="container mx-auto  px-4 sm:px-6 lg:px-12">
             <nav class="flex justify-between items-center h-16 pt-4 md:pt-8">
+
                 <a href="#" aria-label="Home">
                     <svg class="h-8 text-white fill-current" viewBox="0 0 55 32" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -28,102 +29,110 @@
                         <path d="M19.6357 0.0734863H29.2961L25.0447 19.5391H15.3844L19.6357 0.0734863Z"></path>
                     </svg>
                 </a>
+                <div class="fixed right-12 z-50">
 
-                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
-                    <div class="hamburger space-y-1.5">
-                        <span class="block w-6 h-0.5 bg-white transition-all"></span>
-                        <span class="block w-6 h-0.5 bg-white transition-all"></span>
-                        <span class="block w-4 h-0.5 bg-white transition-all"></span>
-                    </div>
-                </button>
-
-                <div class="hidden md:flex items-center bg-slate-900/80 rounded-full font-bold h-12 px-2 group-hover:text-black">
-                    <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
-                        About
-                        <span
-                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
-                    </a>
-                    <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
-                        Process
-                        <span
-                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
-                    </a>
-                    <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
-                        Work
-                        <span
-                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
-                    </a>
-                    <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
-                        Pricing
-                        <span
-                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
-                    </a>
-                    <div
-                        class="flex font-mono text-l font-thin items-center relative before:absolute before:left-0 before:top-1/2 before:h-6 before:-translate-y-1/2 before:border-l-2 before:border-gray-400/50 after:absolute after:right-0 after:top-1/2 after:h-6 after:-translate-y-1/2 after:border-r-2 after:border-gray-400/50  text-indigo-300/40  hover:text-white transition-all duration-300 relative group">
-                        <div class="relative flex justify-center">
-                            <button id="lang-toggle"
-                                class="relative p-2 mx-2 hover:text-indigo-200 cursor-pointer focus:bg-white/10">
-                                EN
-                            </button>
-                            <span
-                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
-
-                            <div id="lang-dropdown"
-                                class="hidden absolute top-full mt-3 bg-gray-800 rounded-md shadow-lg z-10 text-center min-w-[4rem]">
-                                <div
-                                    class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-gray-800">
-                                </div>
-                                <a href="#"
-                                    class="block px-4 py-2 transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">EN</a>
-                                <a href="#"
-                                    class="block px-4 py-2 transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">DE</a>
-                            </div>
+                    <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                        <div class="hamburger space-y-1.5">
+                            <span class="block w-6 h-0.5 bg-white transition-all"></span>
+                            <span class="block w-6 h-0.5 bg-white transition-all"></span>
+                            <span class="block w-4 h-0.5 bg-white transition-all"></span>
                         </div>
-
-                        <div class="relative flex justify-center">
-                            <button id="theme-toggle"
-                                class="relative p-2 mx-2 hover:text-indigo-200 cursor-pointer focus:bg-white/10">
-                                <i class="fa-regular fa-moon"></i>
-                            </button>
-                            <span
-                            class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
-
-                            <div id="theme-dropdown"
-                                class="hidden absolute top-full mt-3 bg-gray-800 rounded-md shadow-lg z-10 text-center min-w-[4rem]">
-                                <div
-                                    class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-gray-800">
-                                </div>
-                                <a href="#"
-                                    class="block px-4 py-2 transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">
-                                    <i class="fa-regular fa-sun"></i> 
-                                </a>
-                                <a href="#"
-                                    class="block px-4 py-2  transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">
-                                    <i class="fa-regular fa-moon"></i>
-                                </a>
-                            </div>
-                        </div>
-
-                    </div>
-                    <button
-                        class="ml-4 bg-indigo-500 cursor-pointer hover: text-white font-medium px-5 py-2 rounded-full flex items-center transition-colors duration-300 ease-in-out group">
-                        Get Started
-                        <svg viewBox="0 0 24 24" class="size-5 stroke-[3px] fill-none stroke-current ml-1">
-                            <line x1="5" y1="12" x2="19" y2="12"
-                                class="scale-x-0 translate-x-[10px] group-hover:translate-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out" />
-                            <polyline points="12 5 19 12 12 19"
-                                class="-translate-x-2 group-hover:translate-x-0 transition-transform duration-300 ease-in-out" />
-                        </svg>
                     </button>
+
+                    <div
+                        class="hidden md:flex items-center bg-slate-900/80 rounded-full font-bold h-12 px-2 group-hover:text-black">
+                        <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
+                            About
+                            <span
+                                class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                        </a>
+                        <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
+                            Process
+                            <span
+                                class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                        </a>
+                        <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
+                            Work
+                            <span
+                                class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                        </a>
+                        <a href="#" class="px-4 py-2 hover:text-white transition-all duration-300 relative group">
+                            Pricing
+                            <span
+                                class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                        </a>
+                        <div
+                            class="flex font-mono text-l font-thin items-center relative before:absolute before:left-0 before:top-1/2 before:h-6 before:-translate-y-1/2 before:border-l-2 before:border-gray-400/50 after:absolute after:right-0 after:top-1/2 after:h-6 after:-translate-y-1/2 after:border-r-2 after:border-gray-400/50  text-indigo-300/40  hover:text-white transition-all duration-300 relative group">
+                            <div class="relative flex justify-center">
+                                <button id="lang-toggle"
+                                    class="relative p-2 mx-2 hover:text-indigo-200 cursor-pointer focus:bg-white/10">
+                                    EN
+                                </button>
+                                <span
+                                    class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+
+                                <div id="lang-dropdown"
+                                    class="hidden absolute top-full mt-3 bg-gray-800 rounded-md shadow-lg z-10 text-center min-w-[4rem]">
+                                    <div
+                                        class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-gray-800">
+                                    </div>
+                                    <a href="#"
+                                        class="block px-4 py-2 transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">EN</a>
+                                    <a href="#"
+                                        class="block px-4 py-2 transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">DE</a>
+                                </div>
+                            </div>
+
+                            <div class="relative flex justify-center">
+                                <button id="theme-toggle"
+                                    class="relative p-2 mx-2 hover:text-indigo-200 cursor-pointer focus:bg-white/10">
+                                    <i class="fa-regular fa-moon"></i>
+                                </button>
+                                <span
+                                    class="absolute -bottom-1.5 left-0 right-0 h-3 bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+
+                                <div id="theme-dropdown"
+                                    class="hidden absolute top-full mt-3 bg-gray-800 rounded-md shadow-lg z-10 text-center min-w-[4rem]">
+                                    <div
+                                        class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-gray-800">
+                                    </div>
+                                    <a href="#"
+                                        class="block px-4 py-2 transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">
+                                        <i class="fa-regular fa-sun"></i>
+                                    </a>
+                                    <a href="#"
+                                        class="block px-4 py-2  transition-all duration-200 hover:shadow-lg hover:translate-y-[-1px]">
+                                        <i class="fa-regular fa-moon"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <button
+                            class="ml-4 bg-indigo-500 cursor-pointer hover: text-white font-medium px-5 py-2 rounded-full flex items-center transition-colors duration-300 ease-in-out group">
+                            Get Started
+                            <svg viewBox="0 0 24 24" class="size-5 stroke-[3px] fill-none stroke-current ml-1">
+                                <line x1="5" y1="12" x2="19" y2="12"
+                                    class="scale-x-0 translate-x-[10px] group-hover:translate-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out" />
+                                <polyline points="12 5 19 12 12 19"
+                                    class="-translate-x-2 group-hover:translate-x-0 transition-transform duration-300 ease-in-out" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </nav>
 
-            <div id="mobile-menu" class="md:hidden bg-slate-900/90 rounded-lg mt-2 overflow-hidden transition-all duration-300 max-h-0">
+            <div id="mobile-menu"
+                class="md:hidden bg-slate-900/90 rounded-lg mt-2 overflow-hidden transition-all duration-300 max-h-0">
                 <div class="px-4 py-2">
-                    <a href="#" class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">About</a>
-                    <a href="#" class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">Process</a>
-                    <a href="#" class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">Work</a>
-                    <a href="#" class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">Pricing</a>
+                    <a href="#"
+                        class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">About</a>
+                    <a href="#"
+                        class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">Process</a>
+                    <a href="#"
+                        class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">Work</a>
+                    <a href="#"
+                        class="block px-4 py-3 text-white hover:bg-slate-800/50 rounded-md transition-colors">Pricing</a>
                     <div class="flex items-center px-4 py-3">
                         <button class="text-white mr-4">
                             <span class="font-mono">EN</span>
@@ -132,7 +141,8 @@
                             <i class="fa-regular fa-moon"></i>
                         </button>
                     </div>
-                    <button class="w-full bg-indigo-500 text-white font-medium px-5 py-3 rounded-full flex items-center justify-center mt-2 mb-2 transition-colors duration-300">
+                    <button
+                        class="w-full bg-indigo-500 text-white font-medium px-5 py-3 rounded-full flex items-center justify-center mt-2 mb-2 transition-colors duration-300">
                         Get Started
                         <svg viewBox="0 0 24 24" class="size-5 stroke-[3px] fill-none stroke-current ml-1">
                             <line x1="5" y1="12" x2="19" y2="12"
@@ -146,13 +156,17 @@
 
             <div class="container mx-auto pt-12 md:pt-40 pb-2">
                 <div class="max-w-3xl">
-                    <p class="text-indigo-400 mb-4 font-mono text-lg sm:text-xl tracking-wider">DESIGN ENGINEERING AS A SERVICE
+                    <p class="text-indigo-400 mb-4 font-mono text-lg sm:text-xl tracking-wider">DESIGN ENGINEERING AS A
+                        SERVICE
                         <span class="text-gray-700 ml-2 sm:ml-4">///</span>
                     </p>
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl text-white font-bold mb-6 sm:mb-8 leading-tight">Make people fall in love with your SaaS product</h1>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl text-white font-bold mb-6 sm:mb-8 leading-tight">Make
+                        people fall in love with your SaaS product</h1>
 
-                    <p class="text-lg sm:text-xl mb-2">The first-ever <span class="font-semibold text-white">design engineering subscription for SaaS</span> companies.</p>
-                    <p class="text-lg sm:text-xl mb-8 sm:mb-10">Thoughtfully crafting compelling sites your visitors won't want to leave.</p>
+                    <p class="text-lg sm:text-xl mb-2">The first-ever <span class="font-semibold text-white">design
+                            engineering subscription for SaaS</span> companies.</p>
+                    <p class="text-lg sm:text-xl mb-8 sm:mb-10">Thoughtfully crafting compelling sites your visitors
+                        won't want to leave.</p>
 
                     <div class="flex flex-wrap gap-3 sm:gap-4">
                         <div class="flex flex-wrap items-center gap-3 sm:gap-4 font-medium">
@@ -183,13 +197,14 @@
                     <div class="mt-8 sm:mt-12">
                         <div class="flex items-center">
                             <div class="flex -space-x-2">
-                                <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-slate-900" src="sean-c-davis.webp"
-                                    alt="User">
-                                <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-slate-900" src="sean-c-davis.webp"
-                                    alt="User">
-                                <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-slate-900" src="sean-c-davis.webp"
-                                    alt="User">
-                                <span class="flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 text-xs font-medium">+12</span>
+                                <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-slate-900"
+                                    src="sean-c-davis.webp" alt="User">
+                                <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-slate-900"
+                                    src="sean-c-davis.webp" alt="User">
+                                <img class="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-slate-900"
+                                    src="sean-c-davis.webp" alt="User">
+                                <span
+                                    class="flex items-center justify-center h-8 w-8 sm:h-10 sm:w-10 text-xs font-medium">+12</span>
                             </div>
                             <div class="ml-3 sm:ml-4">
                                 <p class="text-xs sm:text-sm">Trusted by great builders like <br><span
@@ -208,7 +223,8 @@
                     <img src="https://lw.works/images/logos/stackbit-white.svg" alt="Stackbit" class="h-6 sm:h-8">
                 </div>
                 <div class="flex items-center justify-center">
-                    <img src="https://lw.works/images/logos/contentlayer-white.svg" alt="Contentlayer" class="h-6 sm:h-8">
+                    <img src="https://lw.works/images/logos/contentlayer-white.svg" alt="Contentlayer"
+                        class="h-6 sm:h-8">
                 </div>
                 <div class="flex items-center justify-center col-span-3 sm:col-span-1">
                     <img src="https://lw.works/images/logos/urlbox-white.svg" alt="Urlbox" class="h-6 sm:h-8">
@@ -220,13 +236,155 @@
         </div>
     </section>
 
+
+
+
+    <section
+        class="min-h-screen bg-cover bg-no-repeat bg-center text-slate-300 bg-[#15191F] border-t border-t-slate-600">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-12 py-12 sm:py-20">
+
+
+            <div class="flex flex-col sm:flex-row items-start gap-6 sm:gap-8 mb-8 sm:mb-12 flex-wrap w-full px-0 mx-0">
+
+                <div class="flex-1 min-w-[280px] max-w-md">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-4">
+                        <div
+                            class="w-14 h-14 rounded-xl flex-shrink-0 flex items-center justify-center bg-gradient-to-b from-blue-500/20 to-rose-500/20 shadow-[0_0_20px_-5px_rgba(99,102,241,0.3)]">
+                            <svg viewBox="0 0 24 24" class="w-7 h-7 fill-current text-rose-400" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <rect opacity="0.25" x="3" y="4" width="18" height="18" rx="9"></rect>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M9.25 1C9.25 0.585789 9.58578 0.250001 10 0.250002L14 0.250002C14.4142 0.250002 14.75 0.585789 14.75 1C14.75 1.41422 14.4142 1.75 14 1.75L10 1.75C9.58578 1.75 9.25 1.41422 9.25 1ZM3.75 13C3.75 8.44365 7.44365 4.75 12 4.75C16.5563 4.75 20.25 8.44365 20.25 13C20.25 17.5564 16.5563 21.25 12 21.25L7 21.25C6.58578 21.25 6.25 21.5858 6.25 22C6.25 22.4142 6.58578 22.75 7 22.75L12 22.75C17.3848 22.75 21.75 18.3848 21.75 13C21.75 7.61523 17.3848 3.25 12 3.25C6.61522 3.25 2.25 7.61523 2.25 13C2.25 13.4142 2.58578 13.75 3 13.75C3.41421 13.75 3.75 13.4142 3.75 13ZM1.25 16C1.25 15.5858 1.58578 15.25 2 15.25L7 15.25C7.41421 15.25 7.75 15.5858 7.75 16C7.75 16.4142 7.41421 16.75 7 16.75L2 16.75C1.58578 16.75 1.25 16.4142 1.25 16ZM3.25 19C3.25 18.5858 3.58578 18.25 4 18.25L10 18.25C10.4142 18.25 10.75 18.5858 10.75 19C10.75 19.4142 10.4142 19.75 10 19.75L4 19.75C3.58578 19.75 3.25 19.4142 3.25 19ZM12.75 10C12.75 9.58579 12.4142 9.25 12 9.25C11.5858 9.25 11.25 9.58579 11.25 10L11.25 14C11.25 14.4142 11.5858 14.75 12 14.75C12.4142 14.75 12.75 14.4142 12.75 14L12.75 10Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl sm:text-2xl font-bold text-white">Struggling to keep your site up-to-date?
+                        </h2>
+                    </div>
+                    <p class="text-slate-400 text-lg">
+                        When your product evolves, it can be hard to keep your website up-to-date whilst maintaining
+                        highest design standards.
+                    </p>
+                </div>
+
+                <div class="flex-1 min-w-[280px] max-w-md">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-4">
+                        <div
+                            class="w-14 h-14 rounded-xl flex-shrink-0 flex items-center justify-center bg-gradient-to-b from-blue-500/20 to-rose-500/20 shadow-[0_0_20px_-5px_rgba(99,102,241,0.3)]">
+                            <svg viewBox="0 0 24 24" class="w-7 h-7 fill-current text-rose-400" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.25"
+                                    d="M2 9.00001C2 16 11 21 12 21C12.5092 21 15.093 19.7034 17.5064 17.5064L4.3116 4.31161C2.94824 5.38063 2 7.03228 2 9.00001Z">
+                                </path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M1.46967 1.46967C1.76256 1.17678 2.23744 1.17678 2.53033 1.46967L4.84193 3.78127L18.0367 16.9761L21.5303 20.4697C21.8232 20.7626 21.8232 21.2374 21.5303 21.5303C21.2374 21.8232 20.7626 21.8232 20.4697 21.5303L17.4737 18.5343C16.3981 19.4503 15.321 20.1897 14.4213 20.7224C13.8965 21.0331 13.424 21.2783 13.0398 21.4487C12.8484 21.5336 12.6701 21.6038 12.5126 21.6542C12.3746 21.6984 12.186 21.75 12 21.75C11.8167 21.75 11.6316 21.7 11.4962 21.657C11.3419 21.6081 11.1677 21.54 10.9812 21.4579C10.6068 21.2932 10.1469 21.0562 9.63581 20.7561C8.61307 20.1554 7.35322 19.2829 6.12491 18.1839C3.69522 16.01 1.25 12.8218 1.25 8.99999C1.25 7.09851 2.03635 5.46156 3.21886 4.27952L1.46967 2.53033C1.17678 2.23744 1.17678 1.76256 1.46967 1.46967ZM4.27939 5.34005C3.35245 6.26583 2.75 7.53372 2.75 8.99999C2.75 12.1782 4.80479 14.99 7.1251 17.0661C8.27179 18.092 9.44944 18.9071 10.3954 19.4626C10.8687 19.7406 11.276 19.9489 11.5853 20.085C11.7405 20.1533 11.8622 20.1995 11.9496 20.2272C11.9702 20.2337 11.9869 20.2386 12 20.2422C12.0141 20.2383 12.0323 20.233 12.0551 20.2257C12.1457 20.1967 12.2717 20.1484 12.4318 20.0774C12.7508 19.936 13.1705 19.7198 13.657 19.4317C14.4654 18.9531 15.4359 18.2893 16.4094 17.47L4.27939 5.34005ZM15.9891 3.74993C14.6789 3.73097 13.4503 4.17673 12.624 5.41605C12.4849 5.62469 12.2508 5.75002 12 5.75002C11.7492 5.75002 11.5151 5.62469 11.376 5.41605C10.5543 4.18355 9.30338 3.75001 8 3.75001C7.85633 3.75001 7.71228 3.75667 7.56828 3.76983C7.15579 3.80754 6.79083 3.50372 6.75311 3.09123C6.7154 2.67874 7.01922 2.31377 7.43172 2.27606C7.62037 2.25881 7.80999 2.25001 8 2.25001C9.37536 2.25001 10.86 2.64616 11.9984 3.80946C13.1283 2.64408 14.5981 2.22964 16.0109 2.25008C19.3659 2.29863 22.75 5.03724 22.75 8.99999C22.75 11.3172 21.8486 13.4002 20.6129 15.1525C20.5431 15.2516 20.4721 15.3497 20.4001 15.4467C20.1534 15.7795 19.6836 15.8492 19.3509 15.6024C19.0182 15.3557 18.9485 14.886 19.1952 14.5533C19.2603 14.4656 19.3242 14.3772 19.3871 14.2881C20.5044 12.7036 21.25 10.9177 21.25 8.99999C21.25 5.96278 18.6341 3.7882 15.9891 3.74993Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl sm:text-2xl font-bold text-white">Unhappy with your current design/structure?
+                        </h2>
+                    </div>
+                    <p class="text-slate-400 text-lg">
+                        When focussing on your product, your website can sometimes become unstructured and heavy over
+                        time, which also impacts the design.
+                    </p>
+                </div>
+
+                <div class="flex-1 min-w-[280px] max-w-md">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-4 mb-4">
+                        <div
+                            class="w-14 h-14 rounded-xl flex-shrink-0 flex items-center justify-center bg-gradient-to-b from-blue-500/20 to-rose-500/20 shadow-[0_0_20px_-5px_rgba(99,102,241,0.3)]">
+                            <svg viewBox="0 0 24 24" class="w-7 h-7 fill-current text-rose-400" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path opacity="0.25" fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M15.6 6H2V15.6C2 17.8402 2 18.9603 2.43597 19.816C2.81947 20.5686 3.43139 21.1805 4.18404 21.564C5.03969 22 6.15979 22 8.4 22H15.6C17.8402 22 18.9603 22 19.816 21.564C20.5686 21.1805 21.1805 20.5686 21.564 19.816C21.8979 19.1606 21.9761 18.3501 21.9944 17H21C19.3431 17 18 15.6569 18 14C18 12.3431 19.3431 11 21 11H21.9944C21.9761 9.6499 21.8979 8.8394 21.564 8.18404C21.1805 7.43139 20.5686 6.81947 19.816 6.43597C18.9603 6 17.8402 6 15.6 6Z">
+                                </path>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M12.8925 2.87498C12.4787 2.75681 12.0168 2.75003 10.8 2.75003H4C3.30964 2.75003 2.75 3.30967 2.75 4.00003C2.75 4.69039 3.30964 5.25003 4 5.25003L12 5.25003L15.5 5.25003L15.32 5.01003C14.5899 4.03659 14.3073 3.67112 13.9645 3.411C13.6435 3.16741 13.28 2.98564 12.8925 2.87498ZM4 1.25003C2.48122 1.25003 1.25 2.48125 1.25 4.00003V6.00003V15.6V15.633C1.24999 16.7252 1.24999 17.5907 1.30699 18.2883C1.36527 19.0017 1.48688 19.6053 1.76772 20.1565C2.22312 21.0503 2.94978 21.7769 3.84355 22.2323C4.39472 22.5131 4.99834 22.6348 5.71173 22.693C6.40935 22.75 7.27485 22.75 8.36698 22.75H8.4H15.6H15.633C16.7252 22.75 17.5906 22.75 18.2883 22.693C19.0017 22.6348 19.6053 22.5131 20.1565 22.2323C21.0502 21.7769 21.7769 21.0503 22.2323 20.1565C22.5131 19.6053 22.6347 19.0017 22.693 18.2883C22.75 17.5907 22.75 16.7252 22.75 15.6331V15.6V12.4V12.367C22.75 11.2749 22.75 10.4094 22.693 9.71176C22.6347 8.99837 22.5131 8.39475 22.2323 7.84358C21.7769 6.94981 21.0502 6.22315 20.1565 5.76775C19.6053 5.48691 19.0017 5.3653 18.2883 5.30702C18.0141 5.28462 17.7141 5.27103 17.3846 5.26277L16.52 4.11003L16.4521 4.0195L16.4521 4.01949C15.8134 3.16757 15.4021 2.61886 14.8713 2.21607C14.4021 1.86004 13.8708 1.59439 13.3044 1.43265C12.6637 1.24966 11.9779 1.2498 10.9131 1.25001L10.8 1.25003H4ZM12 6.75003H15.6C16.7325 6.75003 17.5367 6.75061 18.1661 6.80204C18.7867 6.85274 19.171 6.94912 19.4755 7.10426C20.087 7.41585 20.5842 7.91303 20.8958 8.52456C21.0509 8.82903 21.1473 9.21328 21.198 9.83391C21.2087 9.96462 21.2172 10.1029 21.2239 10.25H21C18.9289 10.25 17.25 11.929 17.25 14C17.25 16.0711 18.9289 17.75 21 17.75H21.2239C21.2172 17.8972 21.2087 18.0354 21.198 18.1661C21.1473 18.7868 21.0509 19.171 20.8958 19.4755C20.5842 20.087 20.087 20.5842 19.4755 20.8958C19.171 21.0509 18.7867 21.1473 18.1661 21.198C17.5367 21.2494 16.7325 21.25 15.6 21.25H8.4C7.26752 21.25 6.46327 21.2494 5.83388 21.198C5.21325 21.1473 4.829 21.0509 4.52453 20.8958C3.913 20.5842 3.41582 20.087 3.10423 19.4755C2.94909 19.171 2.85271 18.7868 2.80201 18.1661C2.75058 17.5368 2.75 16.7325 2.75 15.6V6.75003L4 6.75003L12 6.75003ZM21.2495 16.25C21.25 16.046 21.25 15.8298 21.25 15.6V12.4C21.25 12.1703 21.25 11.954 21.2495 11.75H21C19.7574 11.75 18.75 12.7574 18.75 14C18.75 15.2427 19.7574 16.25 21 16.25H21.2495Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h2 class="text-xl sm:text-2xl font-bold text-white">No budget for an entire in-house team?</h2>
+                    </div>
+                    <p class="text-slate-400 text-lg">
+                        Great designers and developers are expensive. Who can afford A-players to build and maintain
+                        their products website?
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto pt-16 relative pt-16  px-4 sm:px-6 lg:px-12 ">
+            <div class="flex flex-col md:flex-row space-y-12 md:space-y-0 md:space-x-6">
+        
+                <div class="md:w-1/2 flex flex-col">
+                    <h2 class="font-bold text-xl sm:text-2xl lg:text-3xl leading-tight drop-shadow">
+                        <span>Focus on your product –<br>let us handle your website</span>
+                    </h2>
+                    <p class="mt-4 sm:mt-6 text-slate-400 text-sm sm:text-base leading-relaxed max-w-lg">
+                        <span>We'll take care of designing your <b>top-tier website</b> including graphics, animations
+                            and docs pages. And we'll build it out using the <b>latest frontend technologies</b> – no
+                            Webflow, no Framer.</span>
+                    </p>
+        
+                    <div class="mt-6 sm:mt-8">
+                        <div class="flex items-center space-x-3 sm:space-x-4">
+                            <div
+                                class="relative h-12 w-12 sm:h-16 sm:w-16 flex-shrink-0 rounded-full border-2 border-white overflow-hidden">
+                                <img alt="Lukas Wiesehan" loading="lazy" decoding="async"
+                                    class="object-cover h-full w-full"
+                                    src="https://lw.works/_next/image?url=%2Fimages%2Favatars%2Flukas-wiesehan.jpg&w=3840&q=75">
+                            </div>
+                            <div>
+                                <p class="pt-1 font-semibold leading-none text-white text-sm sm:text-base">Lukas Wiesehan</p>
+                                <p class="leading-snug text-slate-400 text-xs sm:text-sm">Lead Design Engineer</p>
+                                <p class="pt-1 text-white flex space-x-2">
+                                    <a class="hover:text-gray-300" href="https://twitter.com/lukaswiesehan"
+                                        target="_blank">
+                                        <svg viewBox="0 0 512 512" class="fill-current h-3 sm:h-4"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
+                                        </svg>
+                                    </a>
+                                    <a class="hover:text-gray-300"
+                                        href="https://www.linkedin.com/in/lukas-wiesehan-74931b1bb/" target="_blank">
+                                        <svg viewBox="0 0 448 512" class="fill-current h-3 sm:h-4"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z" />
+                                        </svg>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="md:w-1/2 relative flex flex-col justify-end group pt-16 md:pt-0">
+                    <div class="relative w-full overflow-hidden pb-12">
+                        <div
+                            class="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-gradient-to-r from-transparent via-indigo-400 to-[#15191F] w-full md:w-[120%] h-1/2 blur-3xl transition-opacity duration-500 opacity-50 group-hover:opacity-80 rounded-full z-10">
+                        </div>
+        
+                        <img class="w-full md:w-3/4 mx-auto z-20 relative transition-transform duration-500 group-hover:scale-105"
+                            src="https://lw.works/_next/image?url=%2Fimages%2Fprojects%2Furlbox-contentlayer-dark.png&w=3840&q=75"
+                            alt="Project showcase">
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+    </section>
+
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const hamburger = mobileMenuButton.querySelector('.hamburger');
-            
-            mobileMenuButton.addEventListener('click', function() {
+
+            mobileMenuButton.addEventListener('click', function () {
                 const isOpen = mobileMenu.classList.toggle('max-h-0');
                 mobileMenu.classList.toggle('max-h-[500px]');
                 mobileMenu.classList.toggle('py-2');
@@ -235,12 +393,12 @@
 
             const langToggle = document.getElementById('lang-toggle');
             const langDropdown = document.getElementById('lang-dropdown');
-            
+
             const themeToggle = document.getElementById('theme-toggle');
             const themeDropdown = document.getElementById('theme-dropdown');
-            
+
             const allDropdowns = [langDropdown, themeDropdown];
-            
+
             function closeAllDropdowns() {
                 allDropdowns.forEach(dropdown => {
                     if (dropdown) {
@@ -248,33 +406,34 @@
                     }
                 });
             }
-            
+
             function toggleDropdown(dropdown) {
                 const isCurrentlyHidden = dropdown.classList.contains('hidden');
-                
+
                 closeAllDropdowns();
-                
+
                 if (isCurrentlyHidden) {
                     dropdown.classList.remove('hidden');
                 }
             }
-            
+
             if (langToggle && langDropdown) {
-                langToggle.addEventListener('click', function(e) {
+                langToggle.addEventListener('click', function (e) {
                     e.stopPropagation();
                     toggleDropdown(langDropdown);
                 });
             }
-            
+
             if (themeToggle && themeDropdown) {
-                themeToggle.addEventListener('click', function(e) {
+                themeToggle.addEventListener('click', function (e) {
                     e.stopPropagation();
                     toggleDropdown(themeDropdown);
                 });
             }
-            
+
             document.addEventListener('click', closeAllDropdowns);
         });
     </script>
 </body>
+
 </html>
