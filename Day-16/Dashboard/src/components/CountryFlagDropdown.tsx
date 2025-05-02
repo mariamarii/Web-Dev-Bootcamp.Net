@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Autocomplete, TextField, Box } from '@mui/material';
 
 interface Country {
   code: string;
   label: string;
 }
-
 
 const countries: Country[] = [
   { code: 'US', label: 'United States' },
@@ -16,20 +15,19 @@ const countries: Country[] = [
   { code: 'IN', label: 'India' },
   { code: 'JP', label: 'Japan' },
   { code: 'CN', label: 'China' },
-  
 ];
 
-
-const defaultCountry = countries.find(country => country.code === 'US') || countries[0];
+const defaultCountry = countries.find((country) => country.code === 'US') || countries[0];
 
 interface CountryFlagDropdownProps {
   onChange?: (country: Country | null) => void;
+  isMobile?: boolean;
 }
 
-export default function CountryFlagDropdown({ onChange }: CountryFlagDropdownProps) {
+export default function CountryFlagDropdown({ onChange, isMobile = false }: CountryFlagDropdownProps) {
   const [value, setValue] = useState<Country>(defaultCountry);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: Country | null) => {
+  const handleChange = (newValue: Country | null) => {
     if (newValue) {
       setValue(newValue);
       if (onChange) {
@@ -45,9 +43,13 @@ export default function CountryFlagDropdown({ onChange }: CountryFlagDropdownPro
       options={countries}
       disableClearable
       getOptionLabel={(option) => option.label}
-      onChange={handleChange}
+      onChange={(_, newValue) => handleChange(newValue)}
       renderOption={(props, option) => (
-        <Box component="li" sx={{ '&.MuiAutocomplete-option': { justifyContent: 'center', padding: '8px' } }} {...props}>
+        <Box
+          component="li"
+          sx={{ '&.MuiAutocomplete-option': { justifyContent: 'center', padding: '8px' } }}
+          {...props}
+        >
           <img
             loading="lazy"
             width="24"
@@ -72,26 +74,25 @@ export default function CountryFlagDropdown({ onChange }: CountryFlagDropdownPro
                 style={{ marginRight: '4px' }}
               />
             ),
-            
-            style: { 
-              paddingLeft: 8, 
-              paddingRight: 8, 
+            style: {
+              paddingLeft: 8,
+              paddingRight: 8,
               cursor: 'pointer',
-              width: '60px' 
-            }
+              width: isMobile ? '100%' : '60px',
+            },
           }}
           label=""
           variant="outlined"
           size="small"
           sx={{
-            '& .MuiOutlinedInput-input': { 
+            '& .MuiOutlinedInput-input': {
               padding: '7px 0',
-              opacity: 0, // Hide the text input
-              width: '0px' 
+              opacity: 0,
+              width: '0px',
             },
             '& .MuiOutlinedInput-notchedOutline': { border: '1px solid #e0e0e0' },
             '& .MuiInputLabel-root': { display: 'none' },
-            width: 'auto' // Let it size based on content
+            width: isMobile ? '100%' : 'auto',
           }}
         />
       )}

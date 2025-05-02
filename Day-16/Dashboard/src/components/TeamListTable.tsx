@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Table,
@@ -41,16 +40,15 @@ const TeamListTable = () => {
   const [selected, setSelected] = useState<number[]>([]);
   const [openRow, setOpenRow] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [page, setPage] = useState(1); // API page number (1-based)
-  const [rowsPerPage, setRowsPerPage] = useState(10); // Results per page
-  const totalPages = 10; // Estimate total pages (API doesn't provide total)
+  const [page, setPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const totalPages = 10;
 
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // <600px
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md')); // 600px–960px
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
-  // Fetch team members using useQuery
-  const { data: teamMembers = [], isLoading, isError, error } = useQuery({
+  const { data: teamMembers = [], isLoading, isError, error } = useQuery<TeamMember[], Error>({
     queryKey: ['teamMembers', page, rowsPerPage],
     queryFn: () => fetchTeamMembers(page, rowsPerPage),
   });
@@ -94,30 +92,29 @@ const TeamListTable = () => {
     setOpenRow(openRow === memberId ? null : memberId);
   };
 
-  const handleEditClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
+  const handleEditClick = () => {
+    // Implement edit logic here
   };
 
-  const handleDeleteClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
+  const handleDeleteClick = () => {
+    // Implement delete logic here
   };
 
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
 
-  // Filter team members based on search term
   const filteredTeamMembers = teamMembers.filter((member) =>
     member.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage + 1); // MUI TablePagination is 0-based, API is 1-based
-    setSelected([]); // Reset selection on page change
+  const handleChangePage = (_event: unknown, newPage: number) => {
+    setPage(newPage + 1);
+    setSelected([]);
   };
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(1); // Reset to first page when rows per page changes
-    setSelected([]); // Reset selection
+    setPage(1);
+    setSelected([]);
   };
 
   if (isLoading) {
@@ -128,7 +125,9 @@ const TeamListTable = () => {
             <Skeleton variant="text" width={80} height={24} />
             <Skeleton variant="rectangular" width="100%" height={32} />
             <Skeleton variant="text" width={100} height={20} />
-            <Skeleton variant="rectangular" width={100} height={32} alignSelf="flex-end" />
+            <Box alignSelf="flex-end">
+              <Skeleton variant="rectangular" width={100} height={32} />
+            </Box>
           </Box>
           <Box display="flex" flexDirection="column" gap={2}>
             {[...Array(11)].map((_, index) => (
@@ -138,14 +137,16 @@ const TeamListTable = () => {
                   <Skeleton variant="text" width={120} />
                 </Box>
                 <Skeleton variant="text" width={100} />
-                <Skeleton variant="rectangular" width={50} height={20} mt={1} />
+                <Skeleton variant="rectangular" sx={{ width: 50 }} height={20} mt={1} />
                 <Box display="flex" gap={0.5} mt={1} justifyContent="center">
                   <Skeleton variant="rectangular" width={24} height={24} />
                   <Skeleton variant="rectangular" width={24} height={24} />
                 </Box>
               </Box>
             ))}
-            <Skeleton variant="rectangular" width={180} height={28} alignSelf="flex-end" mt={2} />
+            <Box alignSelf="flex-end" mt={2}>
+              <Skeleton variant="rectangular" width={180} height={28} />
+            </Box>
           </Box>
         </div>
       );
@@ -163,7 +164,7 @@ const TeamListTable = () => {
         >
           <Box display="flex" alignItems="center" gap={1.5} flexWrap="wrap">
             <Skeleton variant="text" width={80} height={24} />
-            <Skeleton variant="rectangular" width={{ xs: '100%', sm: 256 }} height={32} />
+            <Skeleton variant="rectangular" sx={{ width: { xs: '100%', sm: 256 } }} height={32} />
             <Skeleton variant="text" width={100} height={20} />
           </Box>
           <Skeleton variant="rectangular" width={100} height={32} />
@@ -248,14 +249,13 @@ const TeamListTable = () => {
   }
 
   if (isError) {
-    return <Typography variant="body2">Error: {(error as Error).message}</Typography>;
+    return <Typography variant="body2">Error: {error.message}</Typography>;
   }
 
   if (isMobile) {
     return (
       <div>
         <Box display="flex" flexDirection="column" gap={2} mb={1}>
-          
           <TextField
             variant="outlined"
             placeholder="Search by name, email..."
@@ -293,7 +293,6 @@ const TeamListTable = () => {
             Add User
           </Button>
         </Box>
-
         <Box display="flex" flexDirection="column" gap={2}>
           {filteredTeamMembers.map((member) => {
             const isItemSelected = isSelected(member.id);
@@ -420,7 +419,6 @@ const TeamListTable = () => {
         mb={1.5}
       >
         <Box display="flex" alignItems="center" gap={1.5} flexWrap="wrap">
-          
           <TextField
             variant="outlined"
             placeholder="Search by name, email..."
@@ -458,7 +456,6 @@ const TeamListTable = () => {
           Add User
         </Button>
       </Box>
-
       <TableContainer className="rounded-lg bg-white">
         <Table size="small">
           <TableHead>
@@ -505,7 +502,6 @@ const TeamListTable = () => {
           <TableBody>
             {filteredTeamMembers.map((member) => {
               const isItemSelected = isSelected(member.id);
-
               return (
                 <React.Fragment key={member.id}>
                   <TableRow
