@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Autocomplete, TextField, Box } from '@mui/material';
 
-// Define country interface
 interface Country {
   code: string;
   label: string;
 }
 
-// List of countries
+
 const countries: Country[] = [
   { code: 'US', label: 'United States' },
   { code: 'GB', label: 'United Kingdom' },
@@ -17,10 +16,10 @@ const countries: Country[] = [
   { code: 'IN', label: 'India' },
   { code: 'JP', label: 'Japan' },
   { code: 'CN', label: 'China' },
-  // Add more if needed
+  
 ];
 
-// Default US country
+
 const defaultCountry = countries.find(country => country.code === 'US') || countries[0];
 
 interface CountryFlagDropdownProps {
@@ -78,7 +77,7 @@ export default function CountryFlagDropdown({ onChange }: CountryFlagDropdownPro
               paddingLeft: 8, 
               paddingRight: 8, 
               cursor: 'pointer',
-              width: '60px' // Adjust width as needed
+              width: '60px' 
             }
           }}
           label=""
@@ -88,7 +87,7 @@ export default function CountryFlagDropdown({ onChange }: CountryFlagDropdownPro
             '& .MuiOutlinedInput-input': { 
               padding: '7px 0',
               opacity: 0, // Hide the text input
-              width: '0px' // Minimize the input width
+              width: '0px' 
             },
             '& .MuiOutlinedInput-notchedOutline': { border: '1px solid #e0e0e0' },
             '& .MuiInputLabel-root': { display: 'none' },
