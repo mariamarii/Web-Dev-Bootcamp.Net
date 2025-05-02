@@ -1,11 +1,9 @@
-
 import { Box, IconButton, Skeleton, useMediaQuery, useTheme } from '@mui/material';
 import MailOutlineRoundedIcon from '@mui/icons-material/MailOutlineRounded';
 import NotificationsNoneRoundedIcon from '@mui/icons-material/NotificationsNoneRounded';
 import MenuIcon from '@mui/icons-material/Menu';
-import CountryFlagDropdown from './CountryFlagDropdown'; // Adjust path as needed
+import CountryFlagDropdown from './CountryFlagDropdown';
 
-// Define country interface
 interface Country {
   code: string;
   label: string;
@@ -16,13 +14,14 @@ interface TopBarProps {
   onToggleSidebar: () => void;
   showHamburger: boolean;
   isLoading?: boolean;
- 
+  isMobile?: boolean;
+
 }
 
 function TopBar({ onCountryChange, onToggleSidebar, showHamburger, isLoading = false }: TopBarProps) {
   const theme = useTheme();
-  const isMobile= useMediaQuery(theme.breakpoints.down('sm')); // <600px
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md')); // 600px–960px
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
   if (isLoading) {
     return (
