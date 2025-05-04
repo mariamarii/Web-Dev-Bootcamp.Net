@@ -1,3 +1,4 @@
+// Moved to the 'api' folder
 import axios from 'axios';
 import { TeamMember } from '../interfaces/TeamMember'; // Used for return type
 
