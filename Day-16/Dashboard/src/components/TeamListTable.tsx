@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Table,
   TableBody,
@@ -22,7 +22,6 @@ import {
   useTheme,
 } from '@mui/material';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
@@ -32,9 +31,131 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import SearchIcon from '@mui/icons-material/Search';
 import GroupIcon from '@mui/icons-material/Group';
-import { useQuery } from '@tanstack/react-query';
+import { useTeamMembers } from '../services/reactQueryClient';
 import { TeamMember } from '../interfaces/TeamMember';
-import { fetchTeamMembers } from '../services/api';
+import React from 'react';
+
+const LoadingSkeleton = ({ isMobile }: { isMobile: boolean }) => {
+  if (isMobile) {
+    return (
+      <div>
+        <Box display="flex" flexDirection="column" gap={2} mb={3}>
+          <Skeleton variant="text" width={80} height={24} />
+          <Skeleton variant="rectangular" width="100%" height={32} />
+          <Skeleton variant="text" width={100} height={20} />
+          <Box alignSelf="flex-end">
+            <Skeleton variant="rectangular" width={100} height={32} />
+          </Box>
+        </Box>
+        <Box display="flex" flexDirection="column" gap={2}>
+          {[...Array(11)].map((_, index) => (
+            <Box key={index} className="rounded-lg bg-white p-3">
+              <Box display="flex" alignItems="center" gap={1} mb={1}>
+                <Skeleton variant="circular" width={24} height={24} />
+                <Skeleton variant="text" width={120} />
+              </Box>
+              <Skeleton variant="text" width={100} />
+              <Skeleton variant="rectangular" sx={{ width: 50 }} height={20} />
+              <Box display="flex" gap={0.5} mt={1} justifyContent="center">
+                <Skeleton variant="rectangular" width={24} height={24} />
+              </Box>
+            </Box>
+          ))}
+          <Box alignSelf="flex-end" mt={2}>
+            <Skeleton variant="rectangular" width={180} height={28} />
+          </Box>
+        </Box>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <Box
+        display="flex"
+        flexDirection={{ xs: 'column', sm: 'row' }}
+        justifyContent="space-between"
+        alignItems={{ xs: 'flex-start', sm: 'center' }}
+        gap={{ xs: 2, sm: 0 }}
+        mb={3}
+      >
+        <Box display="flex" alignItems="center" gap={1.5} flexWrap="wrap">
+          <Skeleton variant="text" width={80} height={24} />
+          <Skeleton variant="rectangular" sx={{ width: { xs: '100%', sm: 256 } }} height={32} />
+          <Skeleton variant="text" width={100} height={20} />
+        </Box>
+        <Skeleton variant="rectangular" width={100} height={32} />
+      </Box>
+      <TableContainer className="rounded-lg bg-white">
+        <Table size="small">
+          <TableHead>
+            <TableRow sx={{ height: 36 }}>
+              <TableCell sx={{ padding: '4px' }}>
+                <Skeleton variant="rectangular" width={32} height={32} />
+              </TableCell>
+              {['Name', 'Position', 'Department', 'Email', 'Phone', 'Status', 'Edit', ''].map(
+                (header, index) => (
+                  <TableCell
+                    key={index}
+                    sx={{
+                      padding: '4px',
+                      textAlign: header === 'Edit' ? 'center' : 'left',
+                    }}
+                  >
+                    <Skeleton variant="text" width={60} />
+                  </TableCell>
+                )
+              )}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {[...Array(11)].map((_, rowIndex) => (
+              <TableRow key={rowIndex} sx={{ height: 36 }}>
+                <TableCell sx={{ padding: '4px' }}>
+                  <Skeleton variant="rectangular" width={32} height={32} />
+                </TableCell>
+                <TableCell sx={{ padding: '4px' }}>
+                  <Box display="flex" alignItems="center">
+                    <Skeleton variant="circular" width={24} height={24} sx={{ mr: 1 }} />
+                    <Skeleton variant="text" width={80} />
+                  </Box>
+                </TableCell>
+                <TableCell sx={{ padding: '4px' }}>
+                  <Skeleton variant="text" width={80} />
+                </TableCell>
+                <TableCell sx={{ padding: '4px' }}>
+                  <Skeleton variant="text" width={80} />
+                </TableCell>
+                <TableCell sx={{ padding: '4px' }}>
+                  <Skeleton variant="text" width={120} />
+                </TableCell>
+                <TableCell sx={{ padding: '4px' }}>
+                  <Skeleton variant="text" width={80} />
+                </TableCell>
+                <TableCell sx={{ padding: '4px' }}>
+                  <Skeleton variant="rectangular" width={50} height={20} />
+                </TableCell>
+                <TableCell sx={{ padding: '4px', textAlign: 'center' }}>
+                  <Skeleton variant="rectangular" width={24} height={24} />
+                </TableCell>
+                <TableCell sx={{ padding: '4px' }}>
+                  <Skeleton variant="circular" width={20} height={20} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter>
+            <TableRow sx={{ height: 28 }}>
+              <TableCell colSpan={9} align="right" sx={{ padding: '2px' }}>
+                <Skeleton variant="rectangular" width={180} height={28} />
+              </TableCell>
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </TableContainer>
+    </div>
+  );
+};
 
 const TeamListTable = () => {
   const [selected, setSelected] = useState<number[]>([]);
@@ -42,44 +163,27 @@ const TeamListTable = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const totalPages = 10;
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
-  const { data: teamMembers = [], isLoading, isError, error } = useQuery<TeamMember[], Error>({
-    queryKey: ['teamMembers', page, rowsPerPage],
-    queryFn: () => fetchTeamMembers(page, rowsPerPage),
-  });
+  const { teamMembers, totalCount, isLoading, isError, error } = useTeamMembers(
+    page,
+    rowsPerPage,
+    searchTerm
+  );
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = filteredTeamMembers.map((member) => member.id);
-      setSelected(newSelected);
+      setSelected(filteredTeamMembers.map((member) => member.id));
       return;
     }
     setSelected([]);
   };
 
   const handleClick = (id: number) => {
-    const selectedIndex = selected.indexOf(id);
-    let newSelected: number[] = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
+    setSelected((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
   };
 
   const handleCheckboxClick = (event: React.MouseEvent, id: number) => {
@@ -96,11 +200,7 @@ const TeamListTable = () => {
     // Implement edit logic here
   };
 
-  const handleDeleteClick = () => {
-    // Implement delete logic here
-  };
-
-  const isSelected = (id: number) => selected.indexOf(id) !== -1;
+  const isSelected = (id: number) => selected.includes(id);
 
   const filteredTeamMembers = teamMembers.filter((member) =>
     member.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -118,138 +218,15 @@ const TeamListTable = () => {
   };
 
   if (isLoading) {
-    if (isMobile) {
-      return (
-        <div>
-          <Box display="flex" flexDirection="column" gap={2} mb={3}>
-            <Skeleton variant="text" width={80} height={24} />
-            <Skeleton variant="rectangular" width="100%" height={32} />
-            <Skeleton variant="text" width={100} height={20} />
-            <Box alignSelf="flex-end">
-              <Skeleton variant="rectangular" width={100} height={32} />
-            </Box>
-          </Box>
-          <Box display="flex" flexDirection="column" gap={2}>
-            {[...Array(11)].map((_, index) => (
-              <Box key={index} className="rounded-lg bg-white p-3">
-                <Box display="flex" alignItems="center" gap={1} mb={1}>
-                  <Skeleton variant="circular" width={24} height={24} />
-                  <Skeleton variant="text" width={120} />
-                </Box>
-                <Skeleton variant="text" width={100} />
-                <Skeleton variant="rectangular" sx={{ width: 50 }} height={20} mt={1} />
-                <Box display="flex" gap={0.5} mt={1} justifyContent="center">
-                  <Skeleton variant="rectangular" width={24} height={24} />
-                  <Skeleton variant="rectangular" width={24} height={24} />
-                </Box>
-              </Box>
-            ))}
-            <Box alignSelf="flex-end" mt={2}>
-              <Skeleton variant="rectangular" width={180} height={28} />
-            </Box>
-          </Box>
-        </div>
-      );
-    }
-
-    return (
-      <div>
-        <Box
-          display="flex"
-          flexDirection={{ xs: 'column', sm: 'row' }}
-          justifyContent="space-between"
-          alignItems={{ xs: 'flex-start', sm: 'center' }}
-          gap={{ xs: 2, sm: 0 }}
-          mb={3}
-        >
-          <Box display="flex" alignItems="center" gap={1.5} flexWrap="wrap">
-            <Skeleton variant="text" width={80} height={24} />
-            <Skeleton variant="rectangular" sx={{ width: { xs: '100%', sm: 256 } }} height={32} />
-            <Skeleton variant="text" width={100} height={20} />
-          </Box>
-          <Skeleton variant="rectangular" width={100} height={32} />
-        </Box>
-        <TableContainer className="rounded-lg bg-white">
-          <Table size="small">
-            <TableHead>
-              <TableRow sx={{ height: 36 }}>
-                <TableCell sx={{ padding: '4px' }}>
-                  <Skeleton variant="rectangular" width={32} height={32} />
-                </TableCell>
-                {['Name', 'Position', 'Department', 'Email', 'Phone', 'Status', 'Edit', ''].map(
-                  (header, index) => (
-                    <TableCell
-                      key={index}
-                      sx={{
-                        padding: '4px',
-                        textAlign: header === 'Edit' ? 'center' : 'left',
-                        display:
-                          (header === 'Department' || header === 'Email' || header === 'Phone') &&
-                          isTablet
-                            ? 'none'
-                            : 'table-cell',
-                      }}
-                    >
-                      <Skeleton variant="text" width={60} />
-                    </TableCell>
-                  )
-                )}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {[...Array(11)].map((_, rowIndex) => (
-                <TableRow key={rowIndex} sx={{ height: 36 }}>
-                  <TableCell sx={{ padding: '4px' }}>
-                    <Skeleton variant="rectangular" width={32} height={32} />
-                  </TableCell>
-                  <TableCell sx={{ padding: '4px' }}>
-                    <Box display="flex" alignItems="center">
-                      <Skeleton variant="circular" width={24} height={24} sx={{ mr: 1 }} />
-                      <Skeleton variant="text" width={80} />
-                    </Box>
-                  </TableCell>
-                  <TableCell sx={{ padding: '4px' }}>
-                    <Skeleton variant="text" width={80} />
-                  </TableCell>
-                  <TableCell sx={{ padding: '4px', display: isTablet ? 'none' : 'table-cell' }}>
-                    <Skeleton variant="text" width={80} />
-                  </TableCell>
-                  <TableCell sx={{ padding: '4px', display: isTablet ? 'none' : 'table-cell' }}>
-                    <Skeleton variant="text" width={120} />
-                  </TableCell>
-                  <TableCell sx={{ padding: '4px', display: isTablet ? 'none' : 'table-cell' }}>
-                    <Skeleton variant="text" width={80} />
-                  </TableCell>
-                  <TableCell sx={{ padding: '4px' }}>
-                    <Skeleton variant="rectangular" width={50} height={20} />
-                  </TableCell>
-                  <TableCell sx={{ padding: '4px', textAlign: 'center' }}>
-                    <Box display="flex" gap={0.5} justifyContent="center">
-                      <Skeleton variant="rectangular" width={24} height={24} />
-                      <Skeleton variant="rectangular" width={24} height={24} />
-                    </Box>
-                  </TableCell>
-                  <TableCell sx={{ padding: '4px' }}>
-                    <Skeleton variant="circular" width={20} height={20} />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-            <TableFooter>
-              <TableRow sx={{ height: 28 }}>
-                <TableCell colSpan={9} align="right" sx={{ padding: '2px' }}>
-                  <Skeleton variant="rectangular" width={180} height={28} />
-                </TableCell>
-              </TableRow>
-            </TableFooter>
-          </Table>
-        </TableContainer>
-      </div>
-    );
+    return <LoadingSkeleton isMobile={isMobile} />;
   }
 
   if (isError) {
-    return <Typography variant="body2">Error: {error.message}</Typography>;
+    return (
+      <Typography variant="body2" color="error">
+        Failed to load team members: {error?.message || 'Unknown error'}
+      </Typography>
+    );
   }
 
   if (isMobile) {
@@ -334,14 +311,6 @@ const TeamListTable = () => {
                   >
                     <EditOutlinedIcon fontSize="small" className="text-gray-600" />
                   </Button>
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    className="border-gray-200 rounded-md min-w-[24px] p-0.5"
-                    onClick={handleDeleteClick}
-                  >
-                    <DeleteOutlineOutlinedIcon fontSize="small" className="text-gray-600" />
-                  </Button>
                   <IconButton
                     aria-label="expand row"
                     size="small"
@@ -393,7 +362,7 @@ const TeamListTable = () => {
           <TablePagination
             rowsPerPageOptions={[]}
             component="div"
-            count={totalPages * rowsPerPage}
+            count={totalCount}
             rowsPerPage={rowsPerPage}
             page={page - 1}
             onPageChange={handleChangePage}
@@ -551,24 +520,14 @@ const TeamListTable = () => {
                       </Box>
                     </TableCell>
                     <TableCell sx={{ padding: '4px', textAlign: 'center' }}>
-                      <Box className="flex gap-0.5" sx={{ justifyContent: 'center' }}>
-                        <Button
-                          variant="outlined"
-                          size="small"
-                          className="border-gray-200 rounded-md min-w-[24px] p-0.5"
-                          onClick={handleEditClick}
-                        >
-                          <EditOutlinedIcon fontSize="small" className="text-gray-600" />
-                        </Button>
-                        <Button
-                          variant="outlined"
-                          size="small"
-                          className="border-gray-200 rounded-md min-w-[24px] p-0.5"
-                          onClick={handleDeleteClick}
-                        >
-                          <DeleteOutlineOutlinedIcon fontSize="small" className="text-gray-600" />
-                        </Button>
-                      </Box>
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        className="border-gray-200 rounded-md min-w-[24px] p-0.5"
+                        onClick={handleEditClick}
+                      >
+                        <EditOutlinedIcon fontSize="small" className="text-gray-600" />
+                      </Button>
                     </TableCell>
                     <TableCell sx={{ padding: '4px' }}>
                       <IconButton
@@ -658,7 +617,7 @@ const TeamListTable = () => {
                 <TablePagination
                   rowsPerPageOptions={isTablet ? [] : [5, 10, 25]}
                   component="div"
-                  count={totalPages * rowsPerPage}
+                  count={totalCount}
                   rowsPerPage={rowsPerPage}
                   page={page - 1}
                   onPageChange={handleChangePage}
