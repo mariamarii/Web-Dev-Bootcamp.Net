@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 
 namespace ConsoleApp1
 {
@@ -7,6 +7,19 @@ namespace ConsoleApp1
     {
         public string Name { get; set; }
         public bool Gender { get; set; } // true = female, false = male
+    }
+
+    public static class ExtQueue
+    {
+        public static Emps FindFirst(this Queue<Emps> queue, Func<Emps, bool> isMale)
+        {
+            foreach (var emp in queue)
+            {
+                if (isMale(emp))
+                    return emp;
+            }
+            return null;
+        }
     }
 
     class Program
@@ -17,19 +30,9 @@ namespace ConsoleApp1
             emps.Enqueue(new Emps { Name = "mariam", Gender = true });
             emps.Enqueue(new Emps { Name = "mohamed", Gender = false });
             emps.Enqueue(new Emps { Name = "ahmed", Gender = false });
-
             
-            Func<Queue<Emps>, Emps> FirstMale = (queue) =>
-            {
-                foreach (var emp in queue)
-                {
-                    if (emp.Gender == false) 
-                        return emp;
-                }
-                return null;
-            };
+            Emps firstMale = emps.FindFirst(emp => emp.Gender == false);
 
-            Emps firstMale = FirstMale(emps);
             if (firstMale != null)
                 Console.WriteLine($"First male employee: {firstMale.Name}");
             else

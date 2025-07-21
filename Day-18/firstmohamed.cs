@@ -1,14 +1,26 @@
 using System;
-
+using System.Collections.Generic;
 
 namespace ConsoleApp1
 {
     public class Emps
-    
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public bool Gender { get; set; } 
+        public bool Gender { get; set; }
+    }
+
+    public static class StackExtensions
+    {
+        public static Emps FindFirst(this Stack<Emps> stack, Predicate<Emps> p)
+        {
+            foreach (var emp in stack)
+            {
+                if (p(emp))
+                    return emp;
+            }
+            return null;
+        }
     }
 
     class Program
@@ -16,27 +28,23 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Stack<Emps> emps = new Stack<Emps>();
-            emps.Push(new Emps {Id= 1, Name = "mariam", Gender = true });
-            emps.Push(new Emps { Id= 2,Name = "mohammed", Gender = false });
-            emps.Push(new Emps {Id= 3,Name = "ahmed", Gender = false });
+            emps.Push(new Emps { Id = 1, Name = "mariam", Gender = true });
+            emps.Push(new Emps { Id = 2, Name = "mohammed", Gender = false });
+            emps.Push(new Emps { Id = 3, Name = "ahmed", Gender = false });
 
+            
 
-            Predicate<Emps> FirstMohamed = (emp) => emp.Name == "mohammed";
+            Emps result = emps.FindFirst(emp => emp.Name == "mohammed");
 
-            foreach (Emps emp in emps)
+            if (result != null)
             {
-                if (FirstMohamed(emp))
-                {
-                    Console.WriteLine(emp.Id);
-                    Console.WriteLine(emp.Name);
-                    break;
-                   
-                }
-
-                
+                Console.WriteLine(result.Id);
+                Console.WriteLine(result.Name);
             }
-
+            else
+            {
+                Console.WriteLine("No matching employee found.");
+            }
         }
-        
     }
 }
