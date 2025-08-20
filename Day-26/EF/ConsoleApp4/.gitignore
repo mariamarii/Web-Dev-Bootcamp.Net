@@ -1,0 +1,44 @@
+# .NET build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.sln.docstates
+
+# NuGet Packages
+packages/
+*.nupkg
+
+# Visual Studio and Rider temporary files
+.vs/
+.idea/
+*.csproj.user
+*.sln.ide
+*.suo
+
+# Build output for different configurations
+bin/Debug/
+bin/Release/
+obj/Debug/
+obj/Release/
+
+
+
+# Logs and databases
+*.log
+*.sqlite
+EFTask.mdf
+EFTask_log.ldf
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# Connection strings or secrets (if in a config file)
+appsettings.Development.json
+appsettings.local.json
