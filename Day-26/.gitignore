@@ -1,0 +1,53 @@
+# Build results
+bin/
+obj/
+out/
+Debug/
+Release/
+
+# Visual Studio / Rider / VSCode
+.vs/
+.idea/
+.vscode/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+project.lock.json
+
+# Entity Framework Migrations (compiled)
+Migrations/
+
+# Sensitive files
+appsettings.Development.json
+appsettings.*.json
+secrets.json
+
+# Coverage / Analysis
+*.coverage
+*.coveragexml
+TestResult.xml
+TestResults/
+
+# Publish
+publish/
