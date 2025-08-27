@@ -4,5 +4,5 @@ public class LoginDto
 {
     public string username { get; set; }
     public string password { get; set; }
-    public int employeeId { get; set; }
+    public int EmployeeId { get; set; }
 }

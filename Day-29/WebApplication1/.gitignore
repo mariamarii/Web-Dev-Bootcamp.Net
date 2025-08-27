@@ -38,7 +38,3 @@ Thumbs.db
 
 # Environment variables
 .env
-
-# Connection strings or secrets (if in a config file)
-appsettings.Development.json
-appsettings.local.json
