@@ -15,11 +15,11 @@ public class LoginController(ApplicationDbContext context, IMapper mapper) : Con
     public async Task<IActionResult> AddLogin([FromBody] LoginDto loginDto, CancellationToken cancellationToken)
     {
         var employeeExists = await context.Employees
-            .AnyAsync(e => e.id == loginDto.employeeId, cancellationToken);
+            .AnyAsync(e => e.id == loginDto.EmployeeId, cancellationToken);
 
         if (!employeeExists)
         {
-            return BadRequest($"Employee with ID {loginDto.employeeId} does not exist.");
+            return BadRequest($"Employee with ID {loginDto.EmployeeId} does not exist.");
         }
         var login = mapper.Map<Login>(loginDto);
         
