@@ -6,9 +6,9 @@ public class Department
     public string Name { get; set; } = String.Empty;
     public string Location { get; set; } = String.Empty;
 
-    public ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 
-    public ICollection<DepartmentManager> Managers { get; set; } = new List<DepartmentManager>();
+    public virtual ICollection<DepartmentManager> Managers { get; set; } = new List<DepartmentManager>();
 
-    public ICollection<Project> Projects { get; set; } = new List<Project>();
+    public virtual ICollection<Project> Projects { get; set; } = new List<Project>();
 }

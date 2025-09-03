@@ -3,38 +3,28 @@ using Microsoft.AspNetCore.Mvc;
 using WebApplication2.Dto;
 using WebApplication2.Interfaces;
 using WebApplication2.Models;
-using WebApplication2.Data;
-using Microsoft.EntityFrameworkCore;
+using WebApplication2.Dto.Dependent;
+
 namespace WebApplication2.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class DependentController(
     IGenericRepository<Dependent> repo,
-    IMapper mapper,
-    ApplicationDbContext context
+    IMapper mapper
 ) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAll(int pageNumber = 1, int pageSize = 10)
     {
-        var items = await context.Dependents
-            .Include(d => d.Employee)
-            .AsNoTracking()
-            .Skip((pageNumber - 1) * pageSize).Take(pageSize)
-            .ToListAsync();
-
+        var items = await repo.GetAllAsync(pageNumber, pageSize);
         return Ok(mapper.Map<IEnumerable<DependentReadDto>>(items));
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var item = await context.Dependents
-            .Include(d => d.Employee)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(d => d.Id == id);
-
+        var item = await repo.GetByIdAsync(id);
         if (item == null) return NotFound();
         return Ok(mapper.Map<DependentReadDto>(item));
     }
@@ -44,23 +34,20 @@ public class DependentController(
     {
         var dep = mapper.Map<Dependent>(dto);
         repo.Add(dep);
-        await context.SaveChangesAsync();
+        await repo.SaveChangesAsync();
 
-        
         return Ok();
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, DependentWriteDto dto)
     {
-        var dep = await context.Dependents.FindAsync(id);
+        var dep = await repo.GetByIdAsync(id);
         if (dep == null) return NotFound();
 
         mapper.Map(dto, dep);
         repo.Update(dep);
-        await context.SaveChangesAsync();
-
-        
+        await repo.SaveChangesAsync();
 
         return Ok();
     }
@@ -68,11 +55,11 @@ public class DependentController(
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var dep = await context.Dependents.FindAsync(id);
+        var dep = await repo.GetByIdAsync(id);
         if (dep == null) return NotFound();
 
         repo.Delete(dep);
-        await context.SaveChangesAsync();
+        await repo.SaveChangesAsync();
         return NoContent();
     }
 }

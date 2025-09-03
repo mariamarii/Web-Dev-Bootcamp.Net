@@ -4,7 +4,7 @@ using WebApplication2.Dto;
 using WebApplication2.Interfaces;
 using WebApplication2.Models;
 using WebApplication2.Data;
-using Microsoft.EntityFrameworkCore;
+using WebApplication2.Dto.Department;
 
 namespace WebApplication2.Controllers;
 
@@ -19,27 +19,14 @@ public class DepartmentController(
     [HttpGet]
     public async Task<IActionResult> GetAll(int pageNumber = 1, int pageSize = 10)
     {
-        var items = await context.Departments
-            .Include(d => d.Employees)
-            .Include(d => d.Managers).ThenInclude(m => m.Employee)
-            .Include(d => d.Projects)
-            .AsNoTracking()
-            .Skip((pageNumber - 1) * pageSize).Take(pageSize)
-            .ToListAsync();
-
+        var items = await repo.GetAllAsync(pageNumber, pageSize);
         return Ok(mapper.Map<IEnumerable<DepartmentReadDto>>(items));
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var item = await context.Departments
-            .Include(d => d.Employees)
-            .Include(d => d.Managers).ThenInclude(m => m.Employee)
-            .Include(d => d.Projects)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(d => d.Id == id);
-
+        var item = await repo.GetByIdAsync(id);
         if (item == null) return NotFound();
         return Ok(mapper.Map<DepartmentReadDto>(item));
     }
@@ -49,19 +36,19 @@ public class DepartmentController(
     {
         var dept = mapper.Map<Department>(dto);
         repo.Add(dept);
-        await context.SaveChangesAsync();
+        await repo.SaveChangesAsync();
         return Ok();
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, DepartmentWriteDto dto)
     {
-        var dept = await context.Departments.FindAsync(id);
+        var dept = await repo.GetByIdAsync(id);
         if (dept == null) return NotFound();
 
         mapper.Map(dto, dept);
         repo.Update(dept);
-        await context.SaveChangesAsync();
+        await repo.SaveChangesAsync();
 
         return Ok();
     }
@@ -69,11 +56,11 @@ public class DepartmentController(
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var dept = await context.Departments.FindAsync(id);
+        var dept = await repo.GetByIdAsync(id);
         if (dept == null) return NotFound();
 
         repo.Delete(dept);
-        await context.SaveChangesAsync();
+        await repo.SaveChangesAsync();
         return NoContent();
     }
 

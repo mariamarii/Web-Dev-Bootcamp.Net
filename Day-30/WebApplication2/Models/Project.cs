@@ -7,7 +7,7 @@ public class Project
     public string Location { get; set; } = String.Empty;
 
     public int DepartmentId { get; set; }
-    public Department? Department { get; set; }
+    public virtual Department? Department { get; set; }
 
-    public ICollection<EmployeeProject> EmployeeProjects { get; set; } = new List<EmployeeProject>();
+    public virtual ICollection<EmployeeProject> EmployeeProjects { get; set; } = new List<EmployeeProject>();
 }

@@ -1,10 +1,11 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApplication2.Dto;
 using WebApplication2.Interfaces;
 using WebApplication2.Models;
 using WebApplication2.Data;
-using Microsoft.EntityFrameworkCore;
+using WebApplication2.Dto.Employee;
 
 namespace WebApplication2.Controllers;
 
@@ -20,28 +21,16 @@ public class EmployeeController(
     [HttpGet]
     public async Task<IActionResult> GetAll(int pageNumber = 1, int pageSize = 10)
     {
-        var items = await context.Employees
-            .Include(e => e.Department)
-            .Include(e => e.EmployeeProjects).ThenInclude(ep => ep.Project)
-            .Include(e => e.ManagedDepartments).ThenInclude(md => md.Department)
-            .AsNoTracking()
-            .Skip((pageNumber - 1) * pageSize).Take(pageSize)
-            .ToListAsync();
-
+        var items = await repo.GetAllAsync(pageNumber, pageSize);
         return Ok(mapper.Map<IEnumerable<EmployeeReadDto>>(items));
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var e = await context.Employees
-            .Include(x => x.Department)
-            .Include(x => x.EmployeeProjects).ThenInclude(ep => ep.Project)
-            .Include(x => x.ManagedDepartments).ThenInclude(md => md.Department)
-            .FirstOrDefaultAsync(x => x.Id == id);
-
-        if (e == null) return NotFound();
-        return Ok(mapper.Map<EmployeeReadDto>(e));
+        var employee = await repo.GetByIdAsync(id);
+        if (employee == null) return NotFound();
+        return Ok(mapper.Map<EmployeeReadDto>(employee));
     }
 
     [HttpPost]
@@ -57,9 +46,8 @@ public class EmployeeController(
             .ToList();
 
         repo.Add(entity);
-        await context.SaveChangesAsync();
+        await repo.SaveChangesAsync();
 
-        
         return Ok();
     }
 
@@ -85,20 +73,19 @@ public class EmployeeController(
         foreach (var ep in newEPS) entity.EmployeeProjects.Add(ep);
 
         repo.Update(entity);
-        await context.SaveChangesAsync();
+        await repo.SaveChangesAsync();
 
-        
         return Ok();
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var entity = await context.Employees.FindAsync(id);
+        var entity = await repo.GetByIdAsync(id);
         if (entity == null) return NotFound();
 
         repo.Delete(entity);
-        await context.SaveChangesAsync();
+        await repo.SaveChangesAsync();
         return NoContent();
     }
 

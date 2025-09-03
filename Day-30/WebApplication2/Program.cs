@@ -2,6 +2,11 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.Data;
 using WebApplication2.Interfaces;
+using WebApplication2.Mapping;
+using WebApplication2.Mapping.Department;
+using WebApplication2.Mapping.Dependent;
+using WebApplication2.Mapping.Employee;
+using WebApplication2.Mapping.Project;
 using WebApplication2.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,11 +14,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => 
+    options.UseSqlServer(connectionString)
+           .UseLazyLoadingProxies()); 
 
-// reflection
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddAutoMapper(_ => { }, Assembly.GetExecutingAssembly());
+
+builder.Services.AddScoped<EmployeeImageUrlResolver>();
+
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<EmployeeMappingProfile>();
+    cfg.AddProfile<DepartmentMappingProfile>();
+    cfg.AddProfile<ProjectMappingProfile>();
+    cfg.AddProfile<DependentMappingProfile>();
+});
 builder.Services.AddScoped<IFileUpload, FileUpload>();
 builder.Services.AddHttpContextAccessor();
 

@@ -8,5 +8,5 @@ public class Dependent
     public string Relationship { get; set; } = String.Empty;
 
     public int EmployeeId { get; set; }
-    public Employee? Employee { get; set; }
+    public virtual Employee? Employee { get; set; }
 }
