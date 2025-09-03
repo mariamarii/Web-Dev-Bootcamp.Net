@@ -4,7 +4,7 @@ using WebApplication2.Dto;
 using WebApplication2.Interfaces;
 using WebApplication2.Models;
 using WebApplication2.Data;
-using Microsoft.EntityFrameworkCore;
+using WebApplication2.Dto.Project;
 
 namespace WebApplication2.Controllers;
 
@@ -19,25 +19,14 @@ public class ProjectController(
     [HttpGet]
     public async Task<IActionResult> GetAll(int pageNumber = 1, int pageSize = 10)
     {
-        var items = await context.Projects
-            .Include(p => p.Department)
-            .Include(p => p.EmployeeProjects).ThenInclude(ep => ep.Employee)
-            .AsNoTracking()
-            .Skip((pageNumber - 1) * pageSize).Take(pageSize)
-            .ToListAsync();
-
+        var items = await repo.GetAllAsync(pageNumber, pageSize);
         return Ok(mapper.Map<IEnumerable<ProjectReadDto>>(items));
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var item = await context.Projects
-            .Include(p => p.Department)
-            .Include(p => p.EmployeeProjects).ThenInclude(ep => ep.Employee)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(p => p.Id == id);
-
+        var item = await repo.GetByIdAsync(id);
         if (item == null) return NotFound();
         return Ok(mapper.Map<ProjectReadDto>(item));
     }
@@ -47,7 +36,7 @@ public class ProjectController(
     {
         var project = mapper.Map<Project>(dto);
         repo.Add(project);
-        await context.SaveChangesAsync();
+        await repo.SaveChangesAsync();
 
         return Ok();
     }
@@ -55,12 +44,12 @@ public class ProjectController(
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, ProjectWriteDto dto)
     {
-        var project = await context.Projects.FindAsync(id);
+        var project = await repo.GetByIdAsync(id);
         if (project == null) return NotFound();
 
         mapper.Map(dto, project);
         repo.Update(project);
-        await context.SaveChangesAsync();
+        await repo.SaveChangesAsync();
 
         return Ok();
     }
@@ -68,11 +57,11 @@ public class ProjectController(
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var project = await context.Projects.FindAsync(id);
+        var project = await repo.GetByIdAsync(id);
         if (project == null) return NotFound();
 
         repo.Delete(project);
-        await context.SaveChangesAsync();
+        await repo.SaveChangesAsync();
         return NoContent();
     }
 

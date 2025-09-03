@@ -28,12 +28,29 @@ public class GenericRepository<TEntity>(ApplicationDbContext context)
         return context.Set<TEntity>().Find(id);
     }
 
+    public async Task<TEntity?> GetByIdAsync(int id)
+    {
+        return await context.Set<TEntity>().FindAsync(id);
+    }
+
     public IEnumerable<TEntity> GetAll(int pageNumber, int pageSize)
     {
         return context.Set<TEntity>()
-            .AsNoTracking()
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToList();
+    }
+
+    public async Task<IEnumerable<TEntity>> GetAllAsync(int pageNumber, int pageSize)
+    {
+        return await context.Set<TEntity>()
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        await context.SaveChangesAsync();
     }
 }

@@ -10,10 +10,10 @@ public class Employee
     public string? ImagePath { get; set; }
 
     public int DepartmentId { get; set; }
-    public Department? Department { get; set; }
+    public virtual Department? Department { get; set; }
 
-    public ICollection<EmployeeProject> EmployeeProjects { get; set; } = new List<EmployeeProject>();
-    public ICollection<Dependent> Dependents { get; set; } = new List<Dependent>();
+    public virtual ICollection<EmployeeProject> EmployeeProjects { get; set; } = new List<EmployeeProject>();
+    public virtual ICollection<Dependent> Dependents { get; set; } = new List<Dependent>();
 
-    public ICollection<DepartmentManager> ManagedDepartments { get; set; } = new List<DepartmentManager>();
+    public virtual ICollection<DepartmentManager> ManagedDepartments { get; set; } = new List<DepartmentManager>();
 }
