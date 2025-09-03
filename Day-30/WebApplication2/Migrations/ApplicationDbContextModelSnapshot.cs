@@ -40,7 +40,7 @@ namespace WebApplication2.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.DepartmentManager", b =>
@@ -58,7 +58,7 @@ namespace WebApplication2.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("DepartmentManagers");
+                    b.ToTable("DepartmentManagers", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Dependent", b =>
@@ -88,7 +88,7 @@ namespace WebApplication2.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Dependents");
+                    b.ToTable("Dependents", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Employee", b =>
@@ -127,7 +127,7 @@ namespace WebApplication2.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.EmployeeProject", b =>
@@ -145,7 +145,7 @@ namespace WebApplication2.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("EmployeeProjects");
+                    b.ToTable("EmployeeProjects", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.Project", b =>
@@ -171,7 +171,7 @@ namespace WebApplication2.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("WebApplication2.Models.DepartmentManager", b =>
