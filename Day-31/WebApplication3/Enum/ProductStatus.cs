@@ -1,6 +1,8 @@
 namespace WebApplication3.Enum;
 
-public class ProductStatus
+public enum ProductStatus
 {
-    
+    Pending,
+    Approved,
+    Rejected
 }
