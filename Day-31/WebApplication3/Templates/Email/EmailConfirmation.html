@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: #f5f5f5; 
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header { 
+            text-align: center; 
+            color: #333; 
+            margin-bottom: 30px; 
+        }
+        .otp-code { 
+            background: #007bff; 
+            color: white; 
+            padding: 15px 30px; 
+            font-size: 24px; 
+            font-weight: bold; 
+            text-align: center; 
+            border-radius: 5px; 
+            margin: 20px 0; 
+            letter-spacing: 3px; 
+        }
+        .footer { 
+            margin-top: 30px; 
+            text-align: center; 
+            color: #666; 
+            font-size: 14px; 
+        }
+        .expiry-info {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h1 class='header'>Confirm Your Email Address</h1>
+        <p>Hi {{UserName}},</p>
+        <p>Thank you for registering with {{AppName}}! Please use the following OTP code to confirm your email address:</p>
+        
+        <div class='otp-code'>{{OtpCode}}</div>
+        
+        <div class='expiry-info'>
+            <strong>⏰ Expiry Information:</strong><br>
+            This code will expire on {{ExpiresAt}}.<br>
+            Please use it within 15 minutes of receiving this email.
+        </div>
+        
+        <p>If you didn't request this email confirmation, please ignore this email or contact our support team.</p>
+        
+        <div class='footer'>
+            <p>Best regards,<br>{{AppName}} Team</p>
+            <p><small>This is an automated message, please do not reply to this email.</small></p>
+        </div>
+    </div>
+</body>
+</html>
