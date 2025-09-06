@@ -1,8 +1,10 @@
 using System.Net;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using WebApplication3.Dtos.OTP;
 using WebApplication3.Enum;
+using WebApplication3.Helpers;
 using WebApplication3.Models;
 using WebApplication3.Repositories.Interfaces;
 using WebApplication3.Services.Interfaces;
@@ -12,9 +14,11 @@ namespace WebApplication3.Services.Implementations;
 public class OtpService(
     IGenericRepository<OtpSession> otpRepository,
     UserManager<User> userManager,
-    IEmailService emailService) : IOtpService
+    IEmailService emailService,
+    IOptions<OtpConfig> otpConfig,
+    ISessionEncoder sessionEncoder) : IOtpService
 {
-    private const int OtpValidityMinutes = 15;
+    private readonly OtpConfig _otpConfig = otpConfig.Value;
 
     public async Task<Response<OtpSessionDto>> GenerateOtpAsync(string userId, string purpose)
     {
@@ -31,7 +35,6 @@ public class OtpService(
                 };
             }
 
-            // Invalidate any existing active sessions for this user and purpose
             var existingSessions = await otpRepository.FindAsync(s => 
                 s.UserId == userId && s.Purpose == purpose && !s.IsUsed && s.ExpiresAt > DateTime.UtcNow);
             
@@ -43,8 +46,8 @@ public class OtpService(
             }
 
             var otpCode = GenerateOtpCode();
-            var sessionId = GenerateSessionId();
-            var expiresAt = DateTime.UtcNow.AddMinutes(OtpValidityMinutes);
+            var expiresAt = DateTime.UtcNow.AddMinutes(_otpConfig.ValidityMinutes);
+            var sessionId = sessionEncoder.EncodeSession(userId, expiresAt, purpose);
 
             var otpSession = new OtpSession
             {
@@ -70,7 +73,7 @@ public class OtpService(
 
             var placeholders = new Dictionary<string, string>
             {
-                { "UserName", user.UserName ?? user.Email },
+                { "UserName", user.UserName ?? user.Email ?? "User" },
                 { "OtpCode", otpCode },
                 { "ExpiresAt", expiresAt.ToString("yyyy-MM-dd HH:mm:ss UTC") },
                 { "AppName", "WebApplication3" }
@@ -102,12 +105,44 @@ public class OtpService(
         }
     }
 
-    public async Task<Response<string>> ValidateOtpAsync(string sessionId, string otpCode, string purpose)
+    public async Task<Response<string>> ValidateOtpAsync(string encodedSessionId, string otpCode, string purpose)
     {
         try
         {
+            // First decode and validate the session using the helper
+            var sessionInfo = sessionEncoder.DecodeSession(encodedSessionId);
+            if (sessionInfo == null)
+            {
+                return new Response<string>
+                {
+                    Status = false,
+                    StatusCode = HttpStatusCode.BadRequest,
+                    Message = "Invalid session format"
+                };
+            }
+
+            if (sessionInfo.ExpiresAt < DateTime.UtcNow)
+            {
+                return new Response<string>
+                {
+                    Status = false,
+                    StatusCode = HttpStatusCode.BadRequest,
+                    Message = "Session has expired"
+                };
+            }
+
+            if (sessionInfo.Purpose != purpose)
+            {
+                return new Response<string>
+                {
+                    Status = false,
+                    StatusCode = HttpStatusCode.BadRequest,
+                    Message = "Invalid session purpose"
+                };
+            }
+
             var session = await otpRepository.FirstOrDefaultAsync(s => 
-                s.SessionId == sessionId && s.Purpose == purpose);
+                s.SessionId == encodedSessionId && s.Purpose == purpose);
 
             if (session == null)
             {
@@ -115,7 +150,7 @@ public class OtpService(
                 {
                     Status = false,
                     StatusCode = HttpStatusCode.NotFound,
-                    Message = "Invalid session"
+                    Message = "Session not found"
                 };
             }
 
@@ -149,7 +184,6 @@ public class OtpService(
                 };
             }
 
-            // Mark session as used
             session.IsUsed = true;
             session.UsedAt = DateTime.UtcNow;
             otpRepository.Update(session);
@@ -160,7 +194,7 @@ public class OtpService(
                 Status = true,
                 StatusCode = HttpStatusCode.OK,
                 Message = "OTP validated successfully",
-                Data = session.UserId
+                Data = sessionInfo.UserId 
             };
         }
         catch (Exception ex)
@@ -248,10 +282,5 @@ public class OtpService(
         rng.GetBytes(bytes);
         var code = Math.Abs(BitConverter.ToInt32(bytes, 0)) % 1000000;
         return code.ToString("D6");
-    }
-
-    public string GenerateSessionId()
-    {
-        return Guid.NewGuid().ToString("N")[..16].ToUpper();
     }
 }

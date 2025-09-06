@@ -49,7 +49,6 @@ public class AuthService(
             };
         }
 
-        // Check if email is confirmed
         if (!user.EmailConfirmed)
         {
             return new Response<AuthModal>
@@ -104,7 +103,6 @@ public class AuthService(
             };
         }
 
-        // Generate OTP for email confirmation instead of returning token immediately
         var otpResult = await otpService.GenerateOtpAsync(user.Id, "EmailConfirmation");
         
         if (!otpResult.Status)
@@ -124,7 +122,7 @@ public class AuthService(
             StatusCode = HttpStatusCode.Created,
             Data = new AuthModal
             {
-                Token = string.Empty, // No token until email is confirmed
+                Token = string.Empty, 
                 Role = model.Role,
                 UserName = user.UserName ?? string.Empty,
                 SessionId = otpResult.Data?.SessionId ?? string.Empty,

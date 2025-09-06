@@ -12,7 +12,7 @@ public class OtpSessionConfiguration : IEntityTypeConfiguration<OtpSession>
         
         builder.Property(o => o.SessionId)
             .IsRequired()
-            .HasMaxLength(50);
+            .HasMaxLength(500); 
             
         builder.Property(o => o.UserId)
             .IsRequired();

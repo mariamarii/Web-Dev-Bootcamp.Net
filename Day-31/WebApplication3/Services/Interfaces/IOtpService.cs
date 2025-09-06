@@ -9,6 +9,4 @@ public interface IOtpService
     Task<Response<string>> ValidateOtpAsync(string sessionId, string otpCode, string purpose);
     Task<Response<string>> InvalidateSessionAsync(string sessionId);
     Task<Response<OtpSessionDto>> ResendOtpAsync(string email, string purpose);
-    string GenerateOtpCode();
-    string GenerateSessionId();
 }
