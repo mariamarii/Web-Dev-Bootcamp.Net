@@ -16,29 +16,32 @@ using WebApplication3.Repositories.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
+builder.Services.Configure<EmailConfig>(builder.Configuration.GetSection("EmailConfig"));
+builder.Services.Configure<OtpConfig>(builder.Configuration.GetSection("OtpConfig"));
 
-// add identity
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-// add db context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
            .UseLazyLoadingProxies());
 
-// Register Generic Repository
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
-// Register Specialized Repositories
+
 builder.Services.AddScoped<ICartRepository, CartRepository>();
 
-// Register Services
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IOtpService, OtpService>();
+
+builder.Services.AddScoped<ISessionEncoder, SessionEncoder>();
+
+builder.Services.Configure<EmailConfig>(builder.Configuration.GetSection("EmailConfig"));
 
 
-// add authentication config
 builder.Services.AddAuthentication(options =>
 {
     // to avoid adding [Authorize(AutheticationSchema = "Bearer")] to every controller
@@ -96,14 +99,12 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
 
-// Configure the HTTP request pipeline.
 
 if (app.Environment.IsDevelopment())
 {
@@ -113,7 +114,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// Enable static files to serve images
 app.UseStaticFiles();
 
 app.UseAuthentication();
@@ -132,7 +132,6 @@ var loggerFactory = services.GetRequiredService<ILoggerFactory>();
 
 var logger = loggerFactory.CreateLogger("app");
 
-// update database when the app starts
 try
 {
     var context = services.GetRequiredService<ApplicationDbContext>();

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Confirmation</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f6f8; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color:#333;">
+<div style="max-width:600px; margin:40px auto; background:#ffffff; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); overflow:hidden;">
+
+    <!-- Header -->
+    <div style="background:linear-gradient(135deg,#007bff,#0056b3); padding:20px; text-align:center; color:#ffffff;">
+        <h1 style="margin:0; font-size:22px;">Confirm Your Email</h1>
+    </div>
+
+    <!-- Body -->
+    <div style="padding:30px;">
+        <p style="font-size:15px;">Hi <strong>{{UserName}}</strong>,</p>
+        <p style="font-size:15px; line-height:1.6;">
+            Thank you for registering with <strong>{{AppName}}</strong>!
+            Please use the following OTP code to verify your email:
+        </p>
+
+        <!-- OTP Box -->
+        <div style="background:#007bff; color:#ffffff; padding:18px; font-size:28px; font-weight:bold; text-align:center; border-radius:8px; margin:25px 0; letter-spacing:5px;">
+            {{OtpCode}}
+        </div>
+
+        <!-- Expiry Notice -->
+        <div style="background:#eaf4ff; border-left:4px solid #007bff; padding:14px 18px; margin:20px 0; border-radius:6px; font-size:14px; line-height:1.5;">
+            <strong>⏰ Code Expiry:</strong><br>
+            This code will expire on <strong>{{ExpiresAt}}</strong>.
+            Please use it within 15 minutes.
+        </div>
+
+        <p style="font-size:14px; color:#555;">
+            If you didn’t request this email, you can safely ignore it.
+            Otherwise, please complete your verification to secure your account.
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <div style="background:#f9f9f9; padding:20px; text-align:center; font-size:13px; color:#777; border-top:1px solid #eee;">
+        <p style="margin:0;">Best regards,<br><strong>{{AppName}} Team</strong></p>
+        <small style="display:block; margin-top:10px; color:#999;">
+            This is an automated message, please do not reply.
+        </small>
+    </div>
+</div>
+</body>
+</html>
