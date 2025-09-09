@@ -1,0 +1,8 @@
+namespace WebApplication1.Dtos.StudentDto;
+
+public class StudentWriteDto
+{
+    public string Name { get; set; } = string.Empty;
+    public int Age { get; set; }
+
+}
