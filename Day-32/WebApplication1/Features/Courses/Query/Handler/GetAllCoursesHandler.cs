@@ -17,11 +17,52 @@ public class GetAllCoursesHandler(IGenericRepository<Course> courseRepository, I
     {
         try
         {
-            var spec = new CoursesWithStudentsSpec();
+            var spec = new CoursesWithFiltersSpec(
+                code: request.Code,
+                title: request.Title,
+                minHours: request.MinHours,
+                maxHours: request.MaxHours,
+                studentName: request.StudentName,
+                minStudentAge: request.MinStudentAge,
+                maxStudentAge: request.MaxStudentAge,
+                hasStudents: request.HasStudents,
+                sortBy: request.SortBy,
+                isDescending: request.IsDescending,
+                page: request.Page,
+                pageSize: request.PageSize
+            );
+            
             var courses = await courseRepository.ListAsync(spec, cancellationToken);
             
+            var countSpec = new CoursesWithFiltersSpec(
+                code: request.Code,
+                title: request.Title,
+                minHours: request.MinHours,
+                maxHours: request.MaxHours,
+                studentName: request.StudentName,
+                minStudentAge: request.MinStudentAge,
+                maxStudentAge: request.MaxStudentAge,
+                hasStudents: request.HasStudents
+            );
+            var totalCount = await courseRepository.CountAsync(countSpec, cancellationToken);
+            
             var courseDtos = mapper.Map<IReadOnlyList<CourseReadDto>>(courses);
-            return new Response(courseDtos, "Courses retrieved successfully", HttpStatusCode.OK);
+            
+            var paginationInfo = new
+            {
+                TotalCount = totalCount,
+                Page = request.Page,
+                PageSize = request.PageSize,
+                TotalPages = (int)Math.Ceiling(totalCount / (double)request.PageSize)
+            };
+            
+            var result = new
+            {
+                Courses = courseDtos,
+                Pagination = paginationInfo
+            };
+            
+            return new Response(result, "Courses retrieved successfully", HttpStatusCode.OK);
         }
         catch (Exception ex)
         {

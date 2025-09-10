@@ -11,9 +11,36 @@ public class CoursesController(IMediator mediator) : ControllerBase
 {
 
     [HttpGet]
-    public async Task<IActionResult> GetAllCourses()
+    public async Task<IActionResult> GetAllCourses(
+        [FromQuery] string? code = null,
+        [FromQuery] string? title = null,
+        [FromQuery] int? minHours = null,
+        [FromQuery] int? maxHours = null,
+        [FromQuery] string? studentName = null,
+        [FromQuery] int? minStudentAge = null,
+        [FromQuery] int? maxStudentAge = null,
+        [FromQuery] bool? hasStudents = null,
+        [FromQuery] string? sortBy = "Title",
+        [FromQuery] bool isDescending = false,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10)
     {
-        var query = new GetAllCoursesQuery();
+        var query = new GetAllCoursesQuery
+        {
+            Code = code,
+            Title = title,
+            MinHours = minHours,
+            MaxHours = maxHours,
+            StudentName = studentName,
+            MinStudentAge = minStudentAge,
+            MaxStudentAge = maxStudentAge,
+            HasStudents = hasStudents,
+            SortBy = sortBy,
+            IsDescending = isDescending,
+            Page = page,
+            PageSize = pageSize
+        };
+        
         var response = await mediator.Send(query);
         return StatusCode((int)response.StatusCode, response);
     }
