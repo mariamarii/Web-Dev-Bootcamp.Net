@@ -12,9 +12,32 @@ public class StudentsController(IMediator mediator) : ControllerBase
 {
 
     [HttpGet]
-    public async Task<IActionResult> GetAllStudents()
+    public async Task<IActionResult> GetAllStudents(
+        [FromQuery] string? name = null,
+        [FromQuery] int? minAge = null,
+        [FromQuery] int? maxAge = null,
+        [FromQuery] string? courseCode = null,
+        [FromQuery] string? courseTitle = null,
+        [FromQuery] bool? hasCourses = null,
+        [FromQuery] string? sortBy = "Name",
+        [FromQuery] bool isDescending = false,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10)
     {
-        var query = new GetAllStudentsQuery();
+        var query = new GetAllStudentsQuery
+        {
+            Name = name,
+            MinAge = minAge,
+            MaxAge = maxAge,
+            CourseCode = courseCode,
+            CourseTitle = courseTitle,
+            HasCourses = hasCourses,
+            SortBy = sortBy,
+            IsDescending = isDescending,
+            Page = page,
+            PageSize = pageSize
+        };
+        
         var response = await mediator.Send(query);
         return StatusCode((int)response.StatusCode, response);
     }

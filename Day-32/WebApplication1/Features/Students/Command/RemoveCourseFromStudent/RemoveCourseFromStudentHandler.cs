@@ -28,6 +28,12 @@ public class RemoveCourseFromStudentHandler(
                 return new Response(null, "Student not found", HttpStatusCode.NotFound);
             }
 
+            var course = await courseRepository.GetByIdAsync(request.CourseId, cancellationToken);
+            if (course == null)
+            {
+                return new Response(null, "Course not found", HttpStatusCode.NotFound);
+            }
+
             // Check if student is enrolled in this course
             var courseToRemove = student.Courses.FirstOrDefault(c => c.Id == request.CourseId);
             if (courseToRemove == null)
