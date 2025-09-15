@@ -17,7 +17,7 @@ public class UserController : BaseController
         var result = await mediator.Send(userCommand);
         return Result(result);
     }
-    
+
     [HttpDelete(Router.UserRouter.Delete)]
     public async Task<IActionResult> Delete(Guid id)
     {
@@ -26,19 +26,19 @@ public class UserController : BaseController
     }
 
     [HttpGet(Router.UserRouter.GetAll)]
-    public async Task<IActionResult> GetAll([FromQuery]GetAllUsersQuery request)
+    public async Task<IActionResult> GetAll([FromQuery] GetAllUsersQuery request)
     {
         var result = await mediator.Send(request);
         return Result(result);
     }
-    
+
     [HttpGet(Router.UserRouter.GetById)]
     public async Task<IActionResult> GetById(Guid id)
     {
         var result = await mediator.Send(new GetUserByIdQuery(id));
         return Result(result);
     }
-    
+
     [HttpPut(Router.UserRouter.Update)]
     public async Task<IActionResult> Update([FromRoute] Guid id, UserWriteDto userWriteDto)
     {

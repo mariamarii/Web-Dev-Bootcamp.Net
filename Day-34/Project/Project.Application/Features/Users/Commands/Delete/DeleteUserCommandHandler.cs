@@ -5,7 +5,7 @@ using Project.Domain.Responses;
 
 namespace Project.Application.Features.Users.Commands.Delete;
 
-public class DeleteUserCommandHandler(IRepository<User> userRepository) 
+public class DeleteUserCommandHandler(IRepository<User> userRepository)
     : ICommandHandler<DeleteUserCommand, string>
 {
     public async Task<Response<string>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)

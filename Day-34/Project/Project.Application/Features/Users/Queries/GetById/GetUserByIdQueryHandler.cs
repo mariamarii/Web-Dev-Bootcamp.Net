@@ -8,14 +8,14 @@ using Project.Domain.Responses;
 
 namespace Project.Application.Features.Users.Queries.GetById;
 
-public class GetUserByIdQueryHandler(IMapper mapper, IRepository<User> userRepository) 
+public class GetUserByIdQueryHandler(IMapper mapper, IRepository<User> userRepository)
     : IQueryHandler<GetUserByIdQuery, UserDto>
 {
     public async Task<Response<UserDto>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
         var spec = new UserByIdSpec(request.Id);
         var user = await userRepository.FirstOrDefaultAsync(spec, cancellationToken);
-        
+
         if (user == null)
             return Response<UserDto>.Failure("User not found");
 

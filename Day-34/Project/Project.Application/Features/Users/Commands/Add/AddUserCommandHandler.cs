@@ -6,7 +6,7 @@ using Project.Domain.Responses;
 
 namespace Project.Application.Features.Users.Commands.Add;
 
-public class AddUserCommandHandler(IMapper mapper, IRepository<User> userRepository) 
+public class AddUserCommandHandler(IMapper mapper, IRepository<User> userRepository)
     : ICommandHandler<AddUserCommand, string>
 {
     public async Task<Response<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)

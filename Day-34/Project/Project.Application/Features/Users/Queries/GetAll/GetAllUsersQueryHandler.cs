@@ -8,7 +8,7 @@ using Project.Domain.Responses;
 
 namespace Project.Application.Features.Users.Queries.GetAll;
 
-public class GetAllUsersQueryHandler(IMapper mapper, IRepository<User> userRepository) 
+public class GetAllUsersQueryHandler(IMapper mapper, IRepository<User> userRepository)
     : IQueryHandler<GetAllUsersQuery, List<UserDto>>
 {
     public async Task<Response<List<UserDto>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)

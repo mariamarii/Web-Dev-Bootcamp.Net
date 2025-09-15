@@ -9,7 +9,7 @@ public class User : Entity, IAuditableEntity, ISoftDeletableEntity
     public string LastName { get; set; } = null!;
     public string Email { get; set; } = null!;
     public string? PhoneNumber { get; set; }
-    
+
     // Navigation properties
     public virtual List<Cart> Carts { get; set; } = new();
 }

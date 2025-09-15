@@ -15,7 +15,7 @@ public class GetCartByIdQueryHandler(IMapper mapper, IRepository<Cart> cartRepos
     {
         var spec = new CartWithItemsSpec(request.Id);
         var cart = await cartRepository.FirstOrDefaultAsync(spec, cancellationToken);
-        
+
         if (cart == null)
             return Response<CartDto>.Failure("Cart not found");
 

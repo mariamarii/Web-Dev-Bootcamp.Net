@@ -7,7 +7,7 @@ public class UsersByNameSpec : Specification<User>
 {
     public UsersByNameSpec(string name)
     {
-        Query.Where(x => x.FirstName.ToLower().Contains(name.ToLower()) || 
+        Query.Where(x => x.FirstName.ToLower().Contains(name.ToLower()) ||
                          x.LastName.ToLower().Contains(name.ToLower()));
     }
 }
