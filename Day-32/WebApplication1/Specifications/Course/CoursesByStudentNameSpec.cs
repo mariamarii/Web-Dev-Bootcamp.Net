@@ -10,6 +10,6 @@ public class CoursesByStudentNameSpec : BaseSpecification<Models.Course>
     {
         AddInclude(c => c.Students);
         
-        AddCriteria(c => c.Students.Any(s => EF.Functions.Like(s.Name.ToLower(), $"%{studentName.ToLower()}%")));
+        SetCriteria(c => c.Students.Any(s => EF.Functions.Like(s.Name.ToLower(), $"%{studentName.ToLower()}%")));
     }
 }

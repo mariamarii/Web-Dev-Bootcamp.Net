@@ -55,14 +55,21 @@ public class CoursesController(IMediator mediator) : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateCourse(int id, [FromBody] UpdateCourseDto dto)
+    public async Task<IActionResult> UpdateCourse(int id, [FromBody] UpdateCourseRequestDto requestDto)
     {
-        dto.Id = id; // Set the ID from the route parameter
-
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
+
+        // Map the request DTO to the handler DTO with ID
+        var dto = new UpdateCourseDto
+        {
+            Id = id,
+            Code = requestDto.Code,
+            Title = requestDto.Title,
+            Hours = requestDto.Hours
+        };
 
         var response = await mediator.Send(dto);
         return StatusCode((int)response.StatusCode, response);

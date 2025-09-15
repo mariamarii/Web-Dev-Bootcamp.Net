@@ -16,6 +16,7 @@ public class StudentProfile : Profile
         CreateMap<CreateStudentDto, Student>().ReverseMap();
         CreateMap<CreateStudentSimpleDto, Student>().ReverseMap();
         CreateMap<UpdateStudentDto, Student>().ReverseMap();
+        CreateMap<UpdateStudentRequestDto, UpdateStudentDto>(); // Map request DTO to handler DTO
         CreateMap<Course, CourseSimpleDto>().ReverseMap();
     }
 }

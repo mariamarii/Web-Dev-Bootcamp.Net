@@ -17,33 +17,37 @@ public class GetAllCoursesHandler(IGenericRepository<Course> courseRepository, I
     {
         try
         {
-            var spec = new CoursesWithFiltersSpec(
-                code: request.Code,
-                title: request.Title,
-                minHours: request.MinHours,
-                maxHours: request.MaxHours,
-                studentName: request.StudentName,
-                minStudentAge: request.MinStudentAge,
-                maxStudentAge: request.MaxStudentAge,
-                hasStudents: request.HasStudents,
-                sortBy: request.SortBy,
-                isDescending: request.IsDescending,
-                page: request.Page,
-                pageSize: request.PageSize
-            );
+            var filterDto = new CourseFilterDto
+            {
+                Code = request.Code,
+                Title = request.Title,
+                MinHours = request.MinHours,
+                MaxHours = request.MaxHours,
+                StudentName = request.StudentName,
+                MinStudentAge = request.MinStudentAge,
+                MaxStudentAge = request.MaxStudentAge,
+                HasStudents = request.HasStudents,
+                SortBy = request.SortBy,
+                IsDescending = request.IsDescending,
+                Page = request.Page,
+                PageSize = request.PageSize
+            };
             
+            var spec = new CoursesWithFiltersSpec(filterDto);
             var courses = await courseRepository.ListAsync(spec, cancellationToken);
             
-            var countSpec = new CoursesWithFiltersSpec(
-                code: request.Code,
-                title: request.Title,
-                minHours: request.MinHours,
-                maxHours: request.MaxHours,
-                studentName: request.StudentName,
-                minStudentAge: request.MinStudentAge,
-                maxStudentAge: request.MaxStudentAge,
-                hasStudents: request.HasStudents
-            );
+            var countFilterDto = new CourseFilterDto
+            {
+                Code = request.Code,
+                Title = request.Title,
+                MinHours = request.MinHours,
+                MaxHours = request.MaxHours,
+                StudentName = request.StudentName,
+                MinStudentAge = request.MinStudentAge,
+                MaxStudentAge = request.MaxStudentAge,
+                HasStudents = request.HasStudents
+            };
+            var countSpec = new CoursesWithFiltersSpec(countFilterDto);
             var totalCount = await courseRepository.CountAsync(countSpec, cancellationToken);
             
             var courseDtos = mapper.Map<IReadOnlyList<CourseReadDto>>(courses);

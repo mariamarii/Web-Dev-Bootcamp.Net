@@ -4,12 +4,13 @@ using WebApplication1.Features.Students.Command.Models;
 using WebApplication1.Features.Students.Query.Models;
 using WebApplication1.Features.Students.Command.RemoveCourseFromStudent;
 using WebApplication1.Dtos.StudentDto;
+using AutoMapper;
 
 namespace WebApplication1.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class StudentsController(IMediator mediator) : ControllerBase
+public class StudentsController(IMediator mediator, IMapper mapper) : ControllerBase
 {
 
     [HttpGet]
@@ -80,8 +81,10 @@ public class StudentsController(IMediator mediator) : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateStudent(int id, [FromBody] UpdateStudentDto dto)
+    public async Task<IActionResult> UpdateStudent(int id, [FromBody] UpdateStudentRequestDto requestDto)
     {
+        // Map the request DTO to the handler DTO and set the ID
+        var dto = mapper.Map<UpdateStudentDto>(requestDto);
         dto.Id = id; // Set the ID from the route parameter
 
         if (!ModelState.IsValid)

@@ -7,8 +7,8 @@ public sealed class StudentsWithCoursesSpec : BaseSpecification<Models.Student>
         public StudentsWithCoursesSpec()
         {
             AddInclude(s => s.Courses);
-            ApplyOrderBy(s => s.Name);
+            SetOrderBy(s => s.Name);
         }
 
-        public StudentsWithCoursesSpec(int skip, int take) : this() => ApplyPaging(skip, take);
+        public StudentsWithCoursesSpec(int skip, int take) : this() => EnablePaging(skip, take);
 }

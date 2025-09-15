@@ -40,5 +40,5 @@ public class GenericRepository<T>(ApplicationDbContext ctx) : IGenericRepository
     }
 
     private IQueryable<T> ApplySpec(ISpecification<T> spec) 
-        => SpecificationEvaluator<T>.GetQuery(ctx.Set<T>().AsQueryable(), spec);
+        => SpecificationEvaluator<T>.ApplySpecification(ctx.Set<T>().AsQueryable(), spec);
 }

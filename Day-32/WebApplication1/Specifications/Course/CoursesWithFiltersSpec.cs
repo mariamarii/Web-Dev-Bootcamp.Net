@@ -1,69 +1,58 @@
 using WebApplication1.Models;
 using WebApplication1.Specifications.Base;
+using WebApplication1.Dtos.CourseDto;
 
 namespace WebApplication1.Specifications.Course;
 
 public class CoursesWithFiltersSpec : BaseSpecification<Models.Course>
 {
-    public CoursesWithFiltersSpec(
-        string? code = null,
-        string? title = null,
-        int? minHours = null,
-        int? maxHours = null,
-        string? studentName = null,
-        int? minStudentAge = null,
-        int? maxStudentAge = null,
-        bool? hasStudents = null,
-        string? sortBy = "Title",
-        bool isDescending = false,
-        int? page = null,
-        int? pageSize = null)
+    public CoursesWithFiltersSpec(CourseFilterDto filter)
     {
         AddInclude(c => c.Students);
 
-        AddCriteria(c => 
-            (string.IsNullOrWhiteSpace(code) || c.Code.ToLower().Contains(code.ToLower())) &&
-            (string.IsNullOrWhiteSpace(title) || c.Title.ToLower().Contains(title.ToLower())) &&
-            (!minHours.HasValue || c.Hours >= minHours.Value) &&
-            (!maxHours.HasValue || c.Hours <= maxHours.Value) &&
-            (string.IsNullOrWhiteSpace(studentName) || c.Students.Any(s => s.Name.ToLower().Contains(studentName.ToLower()))) &&
-            (!minStudentAge.HasValue || c.Students.Any(s => s.Age >= minStudentAge.Value)) &&
-            (!maxStudentAge.HasValue || c.Students.Any(s => s.Age <= maxStudentAge.Value)) &&
-            (!hasStudents.HasValue || (hasStudents.Value ? c.Students.Any() : !c.Students.Any()))
+        SetCriteria(c => 
+            (string.IsNullOrWhiteSpace(filter.Code) || c.Code.ToLower().Contains(filter.Code.ToLower())) &&
+            (string.IsNullOrWhiteSpace(filter.Title) || c.Title.ToLower().Contains(filter.Title.ToLower())) &&
+            (!filter.MinHours.HasValue || c.Hours >= filter.MinHours.Value) &&
+            (!filter.MaxHours.HasValue || c.Hours <= filter.MaxHours.Value) &&
+            (string.IsNullOrWhiteSpace(filter.StudentName) || c.Students.Any(s => s.Name.ToLower().Contains(filter.StudentName.ToLower()))) &&
+            (!filter.MinStudentAge.HasValue || c.Students.Any(s => s.Age >= filter.MinStudentAge.Value)) &&
+            (!filter.MaxStudentAge.HasValue || c.Students.Any(s => s.Age <= filter.MaxStudentAge.Value)) &&
+            (!filter.HasStudents.HasValue || (filter.HasStudents.Value ? c.Students.Any() : !c.Students.Any()))
         );
 
-        switch (sortBy?.ToLower())
+        switch (filter.SortBy?.ToLower())
         {
             case "code":
-                if (isDescending)
-                    AddOrderByDescending(c => c.Code);
+                if (filter.IsDescending)
+                    SetOrderByDescending(c => c.Code);
                 else
-                    AddOrderBy(c => c.Code);
+                    SetOrderBy(c => c.Code);
                 break;
             case "hours":
-                if (isDescending)
-                    AddOrderByDescending(c => c.Hours);
+                if (filter.IsDescending)
+                    SetOrderByDescending(c => c.Hours);
                 else
-                    AddOrderBy(c => c.Hours);
+                    SetOrderBy(c => c.Hours);
                 break;
             case "id":
-                if (isDescending)
-                    AddOrderByDescending(c => c.Id);
+                if (filter.IsDescending)
+                    SetOrderByDescending(c => c.Id);
                 else
-                    AddOrderBy(c => c.Id);
+                    SetOrderBy(c => c.Id);
                 break;
             case "title":
             default:
-                if (isDescending)
-                    AddOrderByDescending(c => c.Title);
+                if (filter.IsDescending)
+                    SetOrderByDescending(c => c.Title);
                 else
-                    AddOrderBy(c => c.Title);
+                    SetOrderBy(c => c.Title);
                 break;
         }
 
-        if (page.HasValue && pageSize.HasValue && page.Value > 0 && pageSize.Value > 0)
+        if (filter.Page > 0 && filter.PageSize > 0)
         {
-            ApplyPaging((page.Value - 1) * pageSize.Value, pageSize.Value);
+            EnablePaging((filter.Page - 1) * filter.PageSize, filter.PageSize);
         }
     }
 }

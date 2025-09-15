@@ -12,15 +12,15 @@ public class CoursesByStudentAgeRangeSpec : BaseSpecification<Models.Course>
         
         if (minAge.HasValue && maxAge.HasValue)
         {
-            AddCriteria(c => c.Students.Any(s => s.Age >= minAge.Value && s.Age <= maxAge.Value));
+            SetCriteria(c => c.Students.Any(s => s.Age >= minAge.Value && s.Age <= maxAge.Value));
         }
         else if (minAge.HasValue)
         {
-            AddCriteria(c => c.Students.Any(s => s.Age >= minAge.Value));
+            SetCriteria(c => c.Students.Any(s => s.Age >= minAge.Value));
         }
         else if (maxAge.HasValue)
         {
-            AddCriteria(c => c.Students.Any(s => s.Age <= maxAge.Value));
+            SetCriteria(c => c.Students.Any(s => s.Age <= maxAge.Value));
         }
     }
 }

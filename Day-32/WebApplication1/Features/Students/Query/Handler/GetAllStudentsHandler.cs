@@ -17,29 +17,33 @@ public class GetAllStudentsHandler(IGenericRepository<Student> studentRepository
     {
         try
         {
-            var spec = new StudentsWithFiltersSpec(
-                name: request.Name,
-                minAge: request.MinAge,
-                maxAge: request.MaxAge,
-                courseCode: request.CourseCode,
-                courseTitle: request.CourseTitle,
-                hasCourses: request.HasCourses,
-                sortBy: request.SortBy,
-                isDescending: request.IsDescending,
-                page: request.Page,
-                pageSize: request.PageSize
-            );
+            var filterDto = new StudentFilterDto
+            {
+                Name = request.Name,
+                MinAge = request.MinAge,
+                MaxAge = request.MaxAge,
+                CourseCode = request.CourseCode,
+                CourseTitle = request.CourseTitle,
+                HasCourses = request.HasCourses,
+                SortBy = request.SortBy,
+                IsDescending = request.IsDescending,
+                Page = request.Page,
+                PageSize = request.PageSize
+            };
             
+            var spec = new StudentsWithFiltersSpec(filterDto);
             var students = await studentRepository.ListAsync(spec, cancellationToken);
             
-            var countSpec = new StudentsWithFiltersSpec(
-                name: request.Name,
-                minAge: request.MinAge,
-                maxAge: request.MaxAge,
-                courseCode: request.CourseCode,
-                courseTitle: request.CourseTitle,
-                hasCourses: request.HasCourses
-            );
+            var countFilterDto = new StudentFilterDto
+            {
+                Name = request.Name,
+                MinAge = request.MinAge,
+                MaxAge = request.MaxAge,
+                CourseCode = request.CourseCode,
+                CourseTitle = request.CourseTitle,
+                HasCourses = request.HasCourses
+            };
+            var countSpec = new StudentsWithFiltersSpec(countFilterDto);
             var totalCount = await studentRepository.CountAsync(countSpec, cancellationToken);
             
             var studentDtos = mapper.Map<IReadOnlyList<StudentReadDto>>(students);
