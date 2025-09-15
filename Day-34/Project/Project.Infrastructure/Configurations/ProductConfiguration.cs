@@ -14,20 +14,25 @@ namespace Project.Infrastructure.Configurations
                 .Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(ProductConstants.ProductNameMaxLengthValue);
-            
+
             builder
-                .Property(x=>x.CreatedAt)
-                .HasDefaultValueSql("getdate()");
-            
+                .Property(x => x.Price)
+                .IsRequired()
+                .HasColumnType("decimal(18,2)");
+
             builder
-                .Property(x=>x.UpdatedAt)
+                .Property(x => x.CreatedAt)
                 .HasDefaultValueSql("getdate()");
-            
+
+            builder
+                .Property(x => x.UpdatedAt)
+                .HasDefaultValueSql("getdate()");
+
             builder
                 .HasOne<Category>(s => s.Category)
                 .WithMany(g => g.Products)
                 .HasForeignKey(s => s.CategoryId);
-            
+
             builder
                 .HasQueryFilter(p => !p.IsDeleted);
         }
