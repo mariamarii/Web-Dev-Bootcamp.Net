@@ -55,8 +55,8 @@ public static class SpecificationEvaluator<T> where T : class
 
     private static IQueryable<T> ApplyPaging(IQueryable<T> query, ISpecification<T> specification)
     {
-        if (specification.IsPagingEnabled && 
-            specification.Skip.HasValue && 
+        if (specification.IsPagingEnabled &&
+            specification.Skip.HasValue &&
             specification.Take.HasValue)
         {
             query = query.Skip(specification.Skip.Value).Take(specification.Take.Value);

@@ -9,7 +9,7 @@ public class StudentsByCourseTitleSpec : BaseSpecification<Models.Student>
     public StudentsByCourseTitleSpec(string courseTitle)
     {
         AddInclude(s => s.Courses);
-        
+
         SetCriteria(s => s.Courses.Any(c => EF.Functions.Like(c.Title.ToLower(), $"%{courseTitle.ToLower()}%")));
     }
 }

@@ -30,10 +30,10 @@ public class GetAllStudentsHandler(IGenericRepository<Student> studentRepository
                 Page = request.Page,
                 PageSize = request.PageSize
             };
-            
+
             var spec = new StudentsWithFiltersSpec(filterDto);
             var students = await studentRepository.ListAsync(spec, cancellationToken);
-            
+
             var countFilterDto = new StudentFilterDto
             {
                 Name = request.Name,
@@ -45,9 +45,9 @@ public class GetAllStudentsHandler(IGenericRepository<Student> studentRepository
             };
             var countSpec = new StudentsWithFiltersSpec(countFilterDto);
             var totalCount = await studentRepository.CountAsync(countSpec, cancellationToken);
-            
+
             var studentDtos = mapper.Map<IReadOnlyList<StudentReadDto>>(students);
-            
+
             var paginationInfo = new
             {
                 TotalCount = totalCount,
@@ -55,13 +55,13 @@ public class GetAllStudentsHandler(IGenericRepository<Student> studentRepository
                 PageSize = request.PageSize,
                 TotalPages = (int)Math.Ceiling(totalCount / (double)request.PageSize)
             };
-            
+
             var result = new
             {
                 Students = studentDtos,
                 Pagination = paginationInfo
             };
-            
+
             return new Response(result, "Students retrieved successfully", HttpStatusCode.OK);
         }
         catch (Exception ex)

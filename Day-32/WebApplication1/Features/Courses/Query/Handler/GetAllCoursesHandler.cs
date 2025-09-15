@@ -32,10 +32,10 @@ public class GetAllCoursesHandler(IGenericRepository<Course> courseRepository, I
                 Page = request.Page,
                 PageSize = request.PageSize
             };
-            
+
             var spec = new CoursesWithFiltersSpec(filterDto);
             var courses = await courseRepository.ListAsync(spec, cancellationToken);
-            
+
             var countFilterDto = new CourseFilterDto
             {
                 Code = request.Code,
@@ -49,9 +49,9 @@ public class GetAllCoursesHandler(IGenericRepository<Course> courseRepository, I
             };
             var countSpec = new CoursesWithFiltersSpec(countFilterDto);
             var totalCount = await courseRepository.CountAsync(countSpec, cancellationToken);
-            
+
             var courseDtos = mapper.Map<IReadOnlyList<CourseReadDto>>(courses);
-            
+
             var paginationInfo = new
             {
                 TotalCount = totalCount,
@@ -59,13 +59,13 @@ public class GetAllCoursesHandler(IGenericRepository<Course> courseRepository, I
                 PageSize = request.PageSize,
                 TotalPages = (int)Math.Ceiling(totalCount / (double)request.PageSize)
             };
-            
+
             var result = new
             {
                 Courses = courseDtos,
                 Pagination = paginationInfo
             };
-            
+
             return new Response(result, "Courses retrieved successfully", HttpStatusCode.OK);
         }
         catch (Exception ex)

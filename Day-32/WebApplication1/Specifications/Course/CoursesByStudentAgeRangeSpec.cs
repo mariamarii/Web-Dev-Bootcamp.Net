@@ -9,7 +9,7 @@ public class CoursesByStudentAgeRangeSpec : BaseSpecification<Models.Course>
     public CoursesByStudentAgeRangeSpec(int? minAge = null, int? maxAge = null)
     {
         AddInclude(c => c.Students);
-        
+
         if (minAge.HasValue && maxAge.HasValue)
         {
             SetCriteria(c => c.Students.Any(s => s.Age >= minAge.Value && s.Age <= maxAge.Value));

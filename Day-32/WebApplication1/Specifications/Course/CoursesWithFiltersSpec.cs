@@ -10,7 +10,7 @@ public class CoursesWithFiltersSpec : BaseSpecification<Models.Course>
     {
         AddInclude(c => c.Students);
 
-        SetCriteria(c => 
+        SetCriteria(c =>
             (string.IsNullOrWhiteSpace(filter.Code) || c.Code.ToLower().Contains(filter.Code.ToLower())) &&
             (string.IsNullOrWhiteSpace(filter.Title) || c.Title.ToLower().Contains(filter.Title.ToLower())) &&
             (!filter.MinHours.HasValue || c.Hours >= filter.MinHours.Value) &&

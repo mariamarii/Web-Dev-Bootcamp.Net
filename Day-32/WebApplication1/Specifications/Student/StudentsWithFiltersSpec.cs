@@ -10,7 +10,7 @@ public class StudentsWithFiltersSpec : BaseSpecification<Models.Student>
     {
         AddInclude(s => s.Courses);
 
-        SetCriteria(s => 
+        SetCriteria(s =>
             (string.IsNullOrWhiteSpace(filter.Name) || s.Name.ToLower().Contains(filter.Name.ToLower())) &&
             (!filter.MinAge.HasValue || s.Age >= filter.MinAge.Value) &&
             (!filter.MaxAge.HasValue || s.Age <= filter.MaxAge.Value) &&
