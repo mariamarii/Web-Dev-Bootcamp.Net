@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Features.Students.Command.Models;
 using WebApplication1.Features.Students.Query.Models;
 using WebApplication1.Features.Students.Command.RemoveCourseFromStudent;
+using WebApplication1.Dtos.StudentDto;
 
 namespace WebApplication1.Controllers;
 
@@ -12,32 +13,22 @@ public class StudentsController(IMediator mediator) : ControllerBase
 {
 
     [HttpGet]
-    public async Task<IActionResult> GetAllStudents(
-        [FromQuery] string? name = null,
-        [FromQuery] int? minAge = null,
-        [FromQuery] int? maxAge = null,
-        [FromQuery] string? courseCode = null,
-        [FromQuery] string? courseTitle = null,
-        [FromQuery] bool? hasCourses = null,
-        [FromQuery] string? sortBy = "Name",
-        [FromQuery] bool isDescending = false,
-        [FromQuery] int page = 1,
-        [FromQuery] int pageSize = 10)
+    public async Task<IActionResult> GetAllStudents([FromQuery] StudentFilterDto filter)
     {
         var query = new GetAllStudentsQuery
         {
-            Name = name,
-            MinAge = minAge,
-            MaxAge = maxAge,
-            CourseCode = courseCode,
-            CourseTitle = courseTitle,
-            HasCourses = hasCourses,
-            SortBy = sortBy,
-            IsDescending = isDescending,
-            Page = page,
-            PageSize = pageSize
+            Name = filter.Name,
+            MinAge = filter.MinAge,
+            MaxAge = filter.MaxAge,
+            CourseCode = filter.CourseCode,
+            CourseTitle = filter.CourseTitle,
+            HasCourses = filter.HasCourses,
+            SortBy = filter.SortBy,
+            IsDescending = filter.IsDescending,
+            Page = filter.Page,
+            PageSize = filter.PageSize
         };
-        
+
         var response = await mediator.Send(query);
         return StatusCode((int)response.StatusCode, response);
     }
@@ -65,12 +56,12 @@ public class StudentsController(IMediator mediator) : ControllerBase
     [HttpPost("{studentId}/courses/{courseId}")]
     public async Task<IActionResult> AddCourseToStudent(int studentId, int courseId)
     {
-        var dto = new AddCourseToStudentDto 
-        { 
-            StudentId = studentId, 
-            CourseId = courseId 
+        var dto = new AddCourseToStudentDto
+        {
+            StudentId = studentId,
+            CourseId = courseId
         };
-        
+
         var response = await mediator.Send(dto);
         return StatusCode((int)response.StatusCode, response);
     }
@@ -78,12 +69,12 @@ public class StudentsController(IMediator mediator) : ControllerBase
     [HttpDelete("{studentId}/courses/{courseId}")]
     public async Task<IActionResult> RemoveCourseFromStudent(int studentId, int courseId)
     {
-        var dto = new RemoveCourseFromStudentDto 
-        { 
-            StudentId = studentId, 
-            CourseId = courseId 
+        var dto = new RemoveCourseFromStudentDto
+        {
+            StudentId = studentId,
+            CourseId = courseId
         };
-        
+
         var response = await mediator.Send(dto);
         return StatusCode((int)response.StatusCode, response);
     }
@@ -92,7 +83,7 @@ public class StudentsController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> UpdateStudent(int id, [FromBody] UpdateStudentDto dto)
     {
         dto.Id = id; // Set the ID from the route parameter
-        
+
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);

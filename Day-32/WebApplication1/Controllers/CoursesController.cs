@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Features.Courses.Command.Models;
 using WebApplication1.Features.Courses.Query.Models;
+using WebApplication1.Dtos.CourseDto;
 
 namespace WebApplication1.Controllers;
 
@@ -11,36 +12,24 @@ public class CoursesController(IMediator mediator) : ControllerBase
 {
 
     [HttpGet]
-    public async Task<IActionResult> GetAllCourses(
-        [FromQuery] string? code = null,
-        [FromQuery] string? title = null,
-        [FromQuery] int? minHours = null,
-        [FromQuery] int? maxHours = null,
-        [FromQuery] string? studentName = null,
-        [FromQuery] int? minStudentAge = null,
-        [FromQuery] int? maxStudentAge = null,
-        [FromQuery] bool? hasStudents = null,
-        [FromQuery] string? sortBy = "Title",
-        [FromQuery] bool isDescending = false,
-        [FromQuery] int page = 1,
-        [FromQuery] int pageSize = 10)
+    public async Task<IActionResult> GetAllCourses([FromQuery] CourseFilterDto filter)
     {
         var query = new GetAllCoursesQuery
         {
-            Code = code,
-            Title = title,
-            MinHours = minHours,
-            MaxHours = maxHours,
-            StudentName = studentName,
-            MinStudentAge = minStudentAge,
-            MaxStudentAge = maxStudentAge,
-            HasStudents = hasStudents,
-            SortBy = sortBy,
-            IsDescending = isDescending,
-            Page = page,
-            PageSize = pageSize
+            Code = filter.Code,
+            Title = filter.Title,
+            MinHours = filter.MinHours,
+            MaxHours = filter.MaxHours,
+            StudentName = filter.StudentName,
+            MinStudentAge = filter.MinStudentAge,
+            MaxStudentAge = filter.MaxStudentAge,
+            HasStudents = filter.HasStudents,
+            SortBy = filter.SortBy,
+            IsDescending = filter.IsDescending,
+            Page = filter.Page,
+            PageSize = filter.PageSize
         };
-        
+
         var response = await mediator.Send(query);
         return StatusCode((int)response.StatusCode, response);
     }
@@ -69,7 +58,7 @@ public class CoursesController(IMediator mediator) : ControllerBase
     public async Task<IActionResult> UpdateCourse(int id, [FromBody] UpdateCourseDto dto)
     {
         dto.Id = id; // Set the ID from the route parameter
-        
+
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
